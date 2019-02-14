@@ -1,0 +1,380 @@
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=27d9e076a6d5
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten] db version v3.6.9
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten] git version: 167861a164723168adfaaa866f310cb94010428f
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.1.0j  20 Nov 2018
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten] modules: none
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten] build environment:
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten]     distmod: debian92
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten]     distarch: x86_64
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+2019-02-14T07:27:56.181+0000 I CONTROL  [initandlisten] options: { config: "/data/db/mongod.yml", net: { bindIpAll: true }, replication: { replSetName: "rs" }, security: { keyFile: "/data/db/keyFile" }, storage: { dbPath: "/data/db", journal: { enabled: true } }, systemLog: { component: { accessControl: { verbosity: 0 }, command: { verbosity: 0 }, control: { verbosity: 0 }, geo: { verbosity: 0 }, index: { verbosity: 0 }, network: { verbosity: 0 }, query: { verbosity: 0 }, replication: { verbosity: 0 }, storage: { verbosity: 0 }, write: { verbosity: 0 } }, destination: "file", logAppend: true, logRotate: "rename", path: "/data/db/logs/mongodb.log", quiet: true } }
+2019-02-14T07:27:56.181+0000 I STORAGE  [initandlisten] 
+2019-02-14T07:27:56.181+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2019-02-14T07:27:56.181+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2019-02-14T07:27:56.181+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3412M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),cache_cursors=false,compatibility=(release="3.0",require_max="3.0"),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+2019-02-14T07:27:56.611+0000 I STORAGE  [initandlisten] WiredTiger message [1550129276:611973][1:0x7fcf8ba10600], txn-recover: Set global recovery timestamp: 0
+2019-02-14T07:27:56.669+0000 I STORAGE  [initandlisten] createCollection: local.startup_log with no UUID.
+2019-02-14T07:27:56.689+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+2019-02-14T07:27:56.689+0000 I STORAGE  [initandlisten] createCollection: local.me with no UUID.
+2019-02-14T07:27:56.707+0000 I STORAGE  [initandlisten] createCollection: local.replset.minvalid with no UUID.
+2019-02-14T07:27:56.725+0000 I REPL     [initandlisten] Did not find local voted for document at startup.
+2019-02-14T07:27:56.725+0000 I REPL     [initandlisten] Did not find local Rollback ID document at startup. Creating one.
+2019-02-14T07:27:56.725+0000 I STORAGE  [initandlisten] createCollection: local.system.rollback.id with no UUID.
+2019-02-14T07:27:56.744+0000 I REPL     [initandlisten] Initialized the rollback ID to 1
+2019-02-14T07:27:56.744+0000 I REPL     [initandlisten] Did not find local replica set configuration document at startup;  NoMatchingDocument: Did not find replica set configuration document in local.system.replset
+2019-02-14T07:27:56.744+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+2019-02-14T07:27:56.744+0000 I CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
+2019-02-14T07:27:57.464+0000 I NETWORK  [conn1] end connection 192.168.2.10:32920 (0 connections now open)
+2019-02-14T07:27:58.105+0000 I NETWORK  [conn2] received client metadata from 192.168.2.10:32948 conn2: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:27:58.105+0000 I NETWORK  [conn3] received client metadata from 192.168.2.10:32950 conn3: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:27:58.105+0000 I ACCESS   [conn3] SCRAM-SHA-1 authentication failed for root on admin from client 192.168.2.10:32950 ; UserNotFound: Could not find user root@admin
+2019-02-14T07:27:58.618+0000 I NETWORK  [conn3] end connection 192.168.2.10:32950 (1 connection now open)
+2019-02-14T07:27:58.618+0000 I NETWORK  [conn2] end connection 192.168.2.10:32948 (0 connections now open)
+2019-02-14T07:27:58.896+0000 I ACCESS   [conn4] note: no users configured in admin.system.users, allowing localhost access
+2019-02-14T07:27:58.896+0000 I NETWORK  [conn4] received client metadata from 127.0.0.1:47438 conn4: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
+2019-02-14T07:27:58.901+0000 I REPL     [conn4] replSetInitiate admin command received from client
+2019-02-14T07:27:58.911+0000 I NETWORK  [conn5] end connection 172.20.0.1:48144 (1 connection now open)
+2019-02-14T07:27:58.931+0000 I REPL     [conn4] replSetInitiate config object with 3 members parses ok
+2019-02-14T07:27:58.931+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Connecting to 192.168.2.10:27018
+2019-02-14T07:27:58.932+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Connecting to 192.168.2.10:27019
+2019-02-14T07:27:58.933+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Successfully connected to 192.168.2.10:27019, took 2ms (1 connections now open to 192.168.2.10:27019)
+2019-02-14T07:27:58.933+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Successfully connected to 192.168.2.10:27018, took 2ms (1 connections now open to 192.168.2.10:27018)
+2019-02-14T07:27:58.933+0000 I REPL     [conn4] ******
+2019-02-14T07:27:58.933+0000 I REPL     [conn4] creating replication oplog of size: 7280MB...
+2019-02-14T07:27:58.933+0000 I STORAGE  [conn4] createCollection: local.oplog.rs with no UUID.
+2019-02-14T07:27:58.933+0000 I NETWORK  [conn6] received client metadata from 172.20.0.1:48164 conn6: { driver: { name: "NetworkInterfaceASIO-Replication", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
+2019-02-14T07:27:58.933+0000 I NETWORK  [conn7] received client metadata from 172.20.0.1:48168 conn7: { driver: { name: "NetworkInterfaceASIO-Replication", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
+2019-02-14T07:27:58.944+0000 I STORAGE  [conn4] Starting WiredTigerRecordStoreThread local.oplog.rs
+2019-02-14T07:27:58.944+0000 I STORAGE  [conn4] The size storer reports that the oplog contains 0 records totaling to 0 bytes
+2019-02-14T07:27:58.944+0000 I STORAGE  [conn4] Scanning the oplog to determine where to place markers for truncation
+2019-02-14T07:27:59.034+0000 I REPL     [conn4] ******
+2019-02-14T07:27:59.035+0000 I STORAGE  [conn4] createCollection: local.system.replset with no UUID.
+2019-02-14T07:27:59.060+0000 I COMMAND  [conn4] Assigning UUID 40214c72-7d51-4780-bdea-33cf42cfe127 to collection local.system.rollback.id
+2019-02-14T07:27:59.062+0000 I COMMAND  [conn4] Assigning UUID 1a841268-678c-49ab-b6d4-3586d66423a7 to collection local.system.replset
+2019-02-14T07:27:59.063+0000 I COMMAND  [conn4] Assigning UUID 87c9a5a7-2d97-4683-941c-d6bd272f4b83 to collection local.me
+2019-02-14T07:27:59.063+0000 I COMMAND  [conn4] Assigning UUID bcba6f98-c41d-4a97-b747-3279c50bcdf7 to collection local.startup_log
+2019-02-14T07:27:59.063+0000 I COMMAND  [conn4] Assigning UUID c57c3175-0448-4168-bec2-5492409a1d21 to collection local.replset.minvalid
+2019-02-14T07:27:59.063+0000 I COMMAND  [conn4] Assigning UUID 10ec4d3a-68b2-459f-9676-e61da603723e to collection local.oplog.rs
+2019-02-14T07:27:59.063+0000 I STORAGE  [conn4] createCollection: admin.system.version with provided UUID: 8390899d-e523-4b14-b96e-0513b834ee99
+2019-02-14T07:27:59.086+0000 I COMMAND  [conn4] setting featureCompatibilityVersion to 3.6
+2019-02-14T07:27:59.086+0000 I NETWORK  [conn4] Skip closing connection for connection # 7
+2019-02-14T07:27:59.086+0000 I NETWORK  [conn4] Skip closing connection for connection # 6
+2019-02-14T07:27:59.086+0000 I NETWORK  [conn4] Skip closing connection for connection # 4
+2019-02-14T07:27:59.087+0000 I REPL     [conn4] New replica set config in use: { _id: "rs", version: 1, protocolVersion: 1, members: [ { _id: 0, host: "192.168.2.10:27017", arbiterOnly: false, buildIndexes: true, hidden: false, priority: 100.0, tags: {}, slaveDelay: 0, votes: 1 }, { _id: 1, host: "192.168.2.10:27018", arbiterOnly: false, buildIndexes: true, hidden: false, priority: 90.0, tags: {}, slaveDelay: 0, votes: 1 }, { _id: 3, host: "192.168.2.10:27019", arbiterOnly: true, buildIndexes: true, hidden: false, priority: 0.0, tags: {}, slaveDelay: 0, votes: 1 } ], settings: { chainingAllowed: true, heartbeatIntervalMillis: 2000, heartbeatTimeoutSecs: 10, electionTimeoutMillis: 10000, catchUpTimeoutMillis: -1, catchUpTakeoverDelayMillis: 30000, getLastErrorModes: {}, getLastErrorDefaults: { w: 1, wtimeout: 0 }, replicaSetId: ObjectId('5c65187e915a5b73231272a6') } }
+2019-02-14T07:27:59.087+0000 I REPL     [conn4] This node is 192.168.2.10:27017 in the config
+2019-02-14T07:27:59.087+0000 I REPL     [conn4] transition to STARTUP2 from STARTUP
+2019-02-14T07:27:59.087+0000 I REPL     [conn4] Starting replication storage threads
+2019-02-14T07:27:59.088+0000 I REPL     [replexec-0] Member 192.168.2.10:27018 is now in state STARTUP
+2019-02-14T07:27:59.088+0000 I REPL     [replexec-1] Member 192.168.2.10:27019 is now in state STARTUP
+2019-02-14T07:27:59.088+0000 I REPL     [conn4] transition to RECOVERING from STARTUP2
+2019-02-14T07:27:59.088+0000 I REPL     [conn4] Starting replication fetcher thread
+2019-02-14T07:27:59.089+0000 I REPL     [conn4] Starting replication applier thread
+2019-02-14T07:27:59.089+0000 I REPL     [conn4] Starting replication reporter thread
+2019-02-14T07:27:59.089+0000 I COMMAND  [conn4] command local.oplog.rs appName: "MongoDB Shell" command: replSetInitiate { replSetInitiate: { _id: "rs", members: [ { _id: 0.0, host: "192.168.2.10:27017", priority: 100.0 }, { _id: 1.0, host: "192.168.2.10:27018", priority: 90.0 }, { _id: 3.0, host: "192.168.2.10:27019", arbiterOnly: true } ] }, lsid: { id: UUID("341829aa-c908-4546-8c2f-e0b7a541cbca") }, $db: "admin" } numYields:0 reslen:22 locks:{ Global: { acquireCount: { r: 36, w: 20, W: 2 }, acquireWaitCount: { W: 1 }, timeAcquiringMicros: { W: 604 } }, Database: { acquireCount: { r: 6, w: 4, W: 16 }, acquireWaitCount: { W: 1 }, timeAcquiringMicros: { W: 2312 } }, Collection: { acquireCount: { r: 4, w: 2 } }, oplog: { acquireCount: { r: 2, w: 3 } } } protocol:op_msg 187ms
+2019-02-14T07:27:59.090+0000 I REPL     [rsSync] transition to SECONDARY from RECOVERING
+2019-02-14T07:27:59.090+0000 I REPL     [rsSync] Resetting sync source to empty, which was :27017
+2019-02-14T07:27:59.098+0000 I ACCESS   [conn4] Unauthorized: not authorized on admin to execute command { endSessions: [ { id: UUID("341829aa-c908-4546-8c2f-e0b7a541cbca") } ], $db: "admin" }
+2019-02-14T07:27:59.098+0000 I NETWORK  [conn4] end connection 127.0.0.1:47438 (2 connections now open)
+2019-02-14T07:27:59.311+0000 I NETWORK  [conn8] received client metadata from 192.168.2.10:32998 conn8: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:27:59.311+0000 I NETWORK  [conn9] received client metadata from 192.168.2.10:33000 conn9: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:27:59.312+0000 I ACCESS   [conn9] SCRAM-SHA-1 authentication failed for root on admin from client 192.168.2.10:33000 ; UserNotFound: Could not find user root@admin
+2019-02-14T07:27:59.831+0000 I NETWORK  [conn9] end connection 192.168.2.10:33000 (3 connections now open)
+2019-02-14T07:27:59.831+0000 I NETWORK  [conn8] end connection 192.168.2.10:32998 (2 connections now open)
+2019-02-14T07:28:00.742+0000 I NETWORK  [conn10] received client metadata from 192.168.2.10:33002 conn10: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:00.743+0000 I NETWORK  [conn11] received client metadata from 192.168.2.10:33004 conn11: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:00.743+0000 I ACCESS   [conn11] SCRAM-SHA-1 authentication failed for root on admin from client 192.168.2.10:33004 ; UserNotFound: Could not find user root@admin
+2019-02-14T07:28:00.956+0000 I NETWORK  [conn13] end connection 172.20.0.1:48196 (5 connections now open)
+2019-02-14T07:28:00.956+0000 I NETWORK  [conn12] end connection 172.20.0.1:48194 (4 connections now open)
+2019-02-14T07:28:01.091+0000 I REPL     [replexec-0] Member 192.168.2.10:27018 is now in state STARTUP2
+2019-02-14T07:28:01.091+0000 I REPL     [replexec-1] Member 192.168.2.10:27019 is now in state ARBITER
+2019-02-14T07:28:01.147+0000 I NETWORK  [conn14] received client metadata from 172.20.0.1:48224 conn14: { driver: { name: "NetworkInterfaceASIO-RS", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
+2019-02-14T07:28:01.155+0000 I NETWORK  [conn15] received client metadata from 172.20.0.1:48228 conn15: { driver: { name: "NetworkInterfaceASIO-RS", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
+2019-02-14T07:28:01.266+0000 I NETWORK  [conn11] end connection 192.168.2.10:33004 (5 connections now open)
+2019-02-14T07:28:01.266+0000 I NETWORK  [conn10] end connection 192.168.2.10:33002 (4 connections now open)
+2019-02-14T07:28:01.592+0000 I REPL     [replexec-1] Member 192.168.2.10:27018 is now in state SECONDARY
+2019-02-14T07:28:02.566+0000 I NETWORK  [conn16] received client metadata from 192.168.2.10:33052 conn16: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:02.566+0000 I NETWORK  [conn17] received client metadata from 192.168.2.10:33054 conn17: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:02.567+0000 I ACCESS   [conn17] SCRAM-SHA-1 authentication failed for root on admin from client 192.168.2.10:33054 ; UserNotFound: Could not find user root@admin
+2019-02-14T07:28:03.087+0000 I NETWORK  [conn17] end connection 192.168.2.10:33054 (5 connections now open)
+2019-02-14T07:28:03.087+0000 I NETWORK  [conn16] end connection 192.168.2.10:33052 (4 connections now open)
+2019-02-14T07:28:05.220+0000 I NETWORK  [conn18] received client metadata from 192.168.2.10:33064 conn18: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:05.221+0000 I NETWORK  [conn19] received client metadata from 192.168.2.10:33066 conn19: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:05.222+0000 I ACCESS   [conn19] SCRAM-SHA-1 authentication failed for root on admin from client 192.168.2.10:33066 ; UserNotFound: Could not find user root@admin
+2019-02-14T07:28:05.733+0000 I NETWORK  [conn18] end connection 192.168.2.10:33064 (5 connections now open)
+2019-02-14T07:28:05.733+0000 I NETWORK  [conn19] end connection 192.168.2.10:33066 (4 connections now open)
+2019-02-14T07:28:06.157+0000 I NETWORK  [conn14] end connection 172.20.0.1:48224 (3 connections now open)
+2019-02-14T07:28:06.242+0000 I NETWORK  [conn20] received client metadata from 172.20.0.1:48260 conn20: { application: { name: "robo3t" }, driver: { name: "MongoDB Internal Client", version: "3.4.3-8-g05b19c6" }, os: { type: "Linux", name: "Ubuntu", architecture: "x86_64", version: "18.04" } }
+2019-02-14T07:28:06.244+0000 I ACCESS   [conn20] SCRAM-SHA-1 authentication failed for root on admin from client 172.20.0.1:48260 ; UserNotFound: Could not find user root@admin
+2019-02-14T07:28:09.514+0000 I NETWORK  [conn21] received client metadata from 192.168.2.10:33090 conn21: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:09.514+0000 I NETWORK  [conn22] received client metadata from 192.168.2.10:33092 conn22: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:09.515+0000 I ACCESS   [conn22] SCRAM-SHA-1 authentication failed for root on admin from client 192.168.2.10:33092 ; UserNotFound: Could not find user root@admin
+2019-02-14T07:28:09.797+0000 I REPL     [replexec-0] Starting an election, since we've seen no PRIMARY in the past 10000ms
+2019-02-14T07:28:09.797+0000 I REPL     [replexec-0] conducting a dry run election to see if we could be elected. current term: 0
+2019-02-14T07:28:09.799+0000 I REPL     [replexec-1] VoteRequester(term 0 dry run) received a yes vote from 192.168.2.10:27018; response message: { term: 0, voteGranted: true, reason: "", ok: 1.0, operationTime: Timestamp(1550129279, 1), $clusterTime: { clusterTime: Timestamp(1550129279, 1), signature: { hash: BinData(0, 0000000000000000000000000000000000000000), keyId: 0 } } }
+2019-02-14T07:28:09.799+0000 I REPL     [replexec-1] dry election run succeeded, running for election in term 1
+2019-02-14T07:28:09.799+0000 I STORAGE  [replexec-1] createCollection: local.replset.election with generated UUID: b5204927-4984-4c32-9c14-8ebed260a38c
+2019-02-14T07:28:09.857+0000 I REPL     [replexec-0] VoteRequester(term 1) received a yes vote from 192.168.2.10:27018; response message: { term: 1, voteGranted: true, reason: "", ok: 1.0, operationTime: Timestamp(1550129279, 1), $clusterTime: { clusterTime: Timestamp(1550129279, 1), signature: { hash: BinData(0, 0000000000000000000000000000000000000000), keyId: 0 } } }
+2019-02-14T07:28:09.857+0000 I REPL     [replexec-0] election succeeded, assuming primary role in term 1
+2019-02-14T07:28:09.857+0000 I REPL     [replexec-0] transition to PRIMARY from SECONDARY
+2019-02-14T07:28:09.857+0000 I REPL     [replexec-0] Resetting sync source to empty, which was :27017
+2019-02-14T07:28:09.857+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Ending connection to host 192.168.2.10:27019 due to bad connection status; 0 connections to that host remain open
+2019-02-14T07:28:09.857+0000 I REPL     [replexec-0] Entering primary catch-up mode.
+2019-02-14T07:28:09.857+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Connecting to 192.168.2.10:27019
+2019-02-14T07:28:09.859+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Successfully connected to 192.168.2.10:27019, took 2ms (1 connections now open to 192.168.2.10:27019)
+2019-02-14T07:28:09.859+0000 I REPL     [replexec-1] Caught up to the latest optime known via heartbeats after becoming primary.
+2019-02-14T07:28:09.859+0000 I REPL     [replexec-1] Exited primary catch-up mode.
+2019-02-14T07:28:10.038+0000 I NETWORK  [conn21] end connection 192.168.2.10:33090 (5 connections now open)
+2019-02-14T07:28:10.038+0000 I NETWORK  [conn22] end connection 192.168.2.10:33092 (4 connections now open)
+2019-02-14T07:28:11.092+0000 I STORAGE  [rsSync] createCollection: config.transactions with generated UUID: 18a6eef9-dd4b-40b8-a98b-b8212c67f990
+2019-02-14T07:28:11.119+0000 I REPL     [rsSync] transition to primary complete; database writes are now permitted
+2019-02-14T07:28:11.120+0000 I STORAGE  [monitoring keys for HMAC] createCollection: admin.system.keys with generated UUID: 7791e713-3c19-4ed3-b971-41c50eb8d9df
+2019-02-14T07:28:12.211+0000 I NETWORK  [conn23] received client metadata from 172.20.0.1:48288 conn23: { driver: { name: "NetworkInterfaceASIO-RS", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
+2019-02-14T07:28:12.301+0000 I COMMAND  [monitoring keys for HMAC] command admin.system.keys command: insert { insert: "system.keys", bypassDocumentValidation: false, ordered: true, documents: [ { _id: 6657754609416667137, purpose: "HMAC", key: BinData(0, 4045C7251CAF2B1C629EEC4531562D80EE8ED425), expiresAt: Timestamp(1557905291, 0) } ], writeConcern: { w: "majority", wtimeout: 60000 }, $db: "admin" } ninserted:1 keysInserted:1 numYields:0 reslen:214 locks:{ Global: { acquireCount: { r: 5, w: 5 } }, Database: { acquireCount: { w: 2, W: 3 } }, Collection: { acquireCount: { w: 2 } }, oplog: { acquireCount: { w: 2 } } } protocol:op_msg 1180ms
+2019-02-14T07:28:16.964+0000 I NETWORK  [conn24] received client metadata from 192.168.2.10:33124 conn24: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:16.964+0000 I NETWORK  [conn25] received client metadata from 192.168.2.10:33126 conn25: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:16.965+0000 I ACCESS   [conn25] SCRAM-SHA-1 authentication failed for root on admin from client 192.168.2.10:33126 ; UserNotFound: Could not find user root@admin
+2019-02-14T07:28:17.486+0000 I NETWORK  [conn24] end connection 192.168.2.10:33124 (6 connections now open)
+2019-02-14T07:28:17.486+0000 I NETWORK  [conn25] end connection 192.168.2.10:33126 (5 connections now open)
+2019-02-14T07:28:18.934+0000 I NETWORK  [conn26] received client metadata from 127.0.0.1:47618 conn26: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
+2019-02-14T07:28:18.938+0000 I REPL     [conn26] replSetInitiate admin command received from client
+2019-02-14T07:28:18.948+0000 I STORAGE  [conn26] createCollection: admin.system.users with generated UUID: 59a2a15c-965d-41d7-89c3-191aa8005c0e
+2019-02-14T07:28:19.020+0000 I ACCESS   [conn26] Unauthorized: not authorized on admin to execute command { endSessions: [ { id: UUID("efea61c1-3813-45cd-8e73-ca3315af6da7") } ], $db: "admin" }
+2019-02-14T07:28:19.020+0000 I NETWORK  [conn26] end connection 127.0.0.1:47618 (5 connections now open)
+2019-02-14T07:28:30.868+0000 I NETWORK  [conn27] received client metadata from 192.168.2.10:33184 conn27: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:30.869+0000 I NETWORK  [conn28] received client metadata from 192.168.2.10:33186 conn28: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:30.876+0000 I NETWORK  [conn28] end connection 192.168.2.10:33186 (6 connections now open)
+2019-02-14T07:28:30.876+0000 I NETWORK  [conn27] end connection 192.168.2.10:33184 (5 connections now open)
+2019-02-14T07:28:30.962+0000 I NETWORK  [conn29] received client metadata from 192.168.2.10:33188 conn29: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:30.962+0000 I NETWORK  [conn30] received client metadata from 192.168.2.10:33190 conn30: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:31.014+0000 I STORAGE  [conn30] createCollection: tttt.user with generated UUID: abcab34d-bea3-47b0-b978-b7151cdb4601
+2019-02-14T07:28:31.050+0000 I INDEX    [conn30] build index on: tttt.user properties: { v: 2, unique: true, key: { user_name: 1, activate: 1 }, name: "user_name_1_activate_1", ns: "tttt.user" }
+2019-02-14T07:28:31.050+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.051+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.051+0000 I STORAGE  [conn30] createCollection: tttt.permission with generated UUID: ac2ad053-41ba-4b7c-bf79-aad6507cb7d5
+2019-02-14T07:28:31.100+0000 I INDEX    [conn30] build index on: tttt.permission properties: { v: 2, unique: true, key: { type: 1 }, name: "type_1", ns: "tttt.permission" }
+2019-02-14T07:28:31.100+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.102+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.103+0000 I STORAGE  [conn30] createCollection: tttt.gui_setting with generated UUID: e01fd454-fd30-47e6-a9b7-8e6d8b7fbd79
+2019-02-14T07:28:31.152+0000 I INDEX    [conn30] build index on: tttt.gui_setting properties: { v: 2, unique: true, key: { gui_no: 1 }, name: "gui_no_1", ns: "tttt.gui_setting" }
+2019-02-14T07:28:31.152+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.153+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.153+0000 I STORAGE  [conn30] createCollection: tttt.panel with generated UUID: 63c5ad90-d8a6-49de-8e44-c92ff9bd1ed3
+2019-02-14T07:28:31.198+0000 I INDEX    [conn30] build index on: tttt.panel properties: { v: 2, key: { Barcode: 1 }, name: "Barcode_1", ns: "tttt.panel" }
+2019-02-14T07:28:31.198+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.200+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.200+0000 I STORAGE  [conn30] createCollection: tttt.el_config with generated UUID: 8d9278c6-6291-4aa2-b3f0-cc7f3d6e1644
+2019-02-14T07:28:31.246+0000 I INDEX    [conn30] build index on: tttt.el_config properties: { v: 2, unique: true, key: { el_no: 1 }, name: "el_no_1", ns: "tttt.el_config" }
+2019-02-14T07:28:31.246+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.249+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.266+0000 I INDEX    [conn30] build index on: tttt.panel properties: { v: 2, unique: true, key: { Barcode: 1, create_time: 1 }, name: "Barcode_1_create_time_1", ns: "tttt.panel" }
+2019-02-14T07:28:31.266+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.267+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.267+0000 I STORAGE  [conn30] createCollection: tttt.panel_status with generated UUID: 0d534521-cedd-45b0-b9da-3c8fca8a7a50
+2019-02-14T07:28:31.313+0000 I INDEX    [conn30] build index on: tttt.panel_status properties: { v: 2, key: { time: 1 }, name: "time_1", ns: "tttt.panel_status" }
+2019-02-14T07:28:31.313+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.315+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.326+0000 I INDEX    [conn30] build index on: tttt.panel_status properties: { v: 2, key: { Panel_ID: 1 }, name: "Panel_ID_1", ns: "tttt.panel_status" }
+2019-02-14T07:28:31.326+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.328+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.329+0000 I STORAGE  [conn30] createCollection: tttt.defect with generated UUID: 53059b91-43b3-4c27-b802-8f1452b3b66e
+2019-02-14T07:28:31.371+0000 I INDEX    [conn30] build index on: tttt.defect properties: { v: 2, key: { time: 1 }, name: "time_1", ns: "tttt.defect" }
+2019-02-14T07:28:31.372+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.372+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.373+0000 I STORAGE  [conn30] createCollection: tttt.panel_defect with generated UUID: 7099bbdc-2e22-48ec-8bbd-56131942f789
+2019-02-14T07:28:31.426+0000 I INDEX    [conn30] build index on: tttt.panel_defect properties: { v: 2, key: { Panel_ID: 1 }, name: "Panel_ID_1", ns: "tttt.panel_defect" }
+2019-02-14T07:28:31.426+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.427+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.444+0000 I INDEX    [conn30] build index on: tttt.panel_defect properties: { v: 2, key: { Defect_ID: 1 }, name: "Defect_ID_1", ns: "tttt.panel_defect" }
+2019-02-14T07:28:31.444+0000 I INDEX    [conn30] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:28:31.445+0000 I INDEX    [conn30] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:28:31.606+0000 I NETWORK  [conn31] received client metadata from 192.168.2.10:33198 conn31: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:31.607+0000 I NETWORK  [conn32] received client metadata from 192.168.2.10:33200 conn32: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:31.613+0000 I NETWORK  [conn32] end connection 192.168.2.10:33200 (8 connections now open)
+2019-02-14T07:28:31.613+0000 I NETWORK  [conn31] end connection 192.168.2.10:33198 (7 connections now open)
+2019-02-14T07:28:31.699+0000 I NETWORK  [conn33] received client metadata from 192.168.2.10:33204 conn33: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:31.700+0000 I NETWORK  [conn34] received client metadata from 192.168.2.10:33206 conn34: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:28:35.924+0000 I STORAGE  [conn34] createCollection: tttt.el with generated UUID: 15976b24-b89c-4c7f-ae03-c2d5d6c59ee6
+2019-02-14T07:28:41.242+0000 I NETWORK  [conn35] received client metadata from 172.20.0.1:48426 conn35: { application: { name: "robo3t" }, driver: { name: "MongoDB Internal Client", version: "3.4.3-8-g05b19c6" }, os: { type: "Linux", name: "Ubuntu", architecture: "x86_64", version: "18.04" } }
+2019-02-14T07:28:55.226+0000 I NETWORK  [conn36] received client metadata from 172.20.0.1:48480 conn36: { application: { name: "robo3t" }, driver: { name: "MongoDB Internal Client", version: "3.4.3-8-g05b19c6" }, os: { type: "Linux", name: "Ubuntu", architecture: "x86_64", version: "18.04" } }
+2019-02-14T07:29:06.242+0000 I NETWORK  [conn37] received client metadata from 172.20.0.1:48528 conn37: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.4.3-8-g05b19c6" }, os: { type: "Linux", name: "Ubuntu", architecture: "x86_64", version: "18.04" } }
+2019-02-14T07:29:31.017+0000 I NETWORK  [conn38] received client metadata from 192.168.2.10:33460 conn38: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:29:31.018+0000 I NETWORK  [conn39] received client metadata from 192.168.2.10:33462 conn39: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:29:31.024+0000 I NETWORK  [conn30] end connection 192.168.2.10:33190 (13 connections now open)
+2019-02-14T07:29:31.024+0000 I NETWORK  [conn29] end connection 192.168.2.10:33188 (12 connections now open)
+2019-02-14T07:29:31.759+0000 I NETWORK  [conn40] received client metadata from 192.168.2.10:33480 conn40: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:29:31.760+0000 I NETWORK  [conn41] received client metadata from 192.168.2.10:33482 conn41: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:29:31.767+0000 I NETWORK  [conn34] end connection 192.168.2.10:33206 (13 connections now open)
+2019-02-14T07:29:31.767+0000 I NETWORK  [conn33] end connection 192.168.2.10:33204 (12 connections now open)
+2019-02-14T07:29:41.246+0000 I NETWORK  [conn42] received client metadata from 172.20.0.1:48710 conn42: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.4.3-8-g05b19c6" }, os: { type: "Linux", name: "Ubuntu", architecture: "x86_64", version: "18.04" } }
+2019-02-14T07:29:55.244+0000 I NETWORK  [conn43] received client metadata from 172.20.0.1:48766 conn43: { application: { name: "MongoDB Shell" }, driver: { name: "MongoDB Internal Client", version: "3.4.3-8-g05b19c6" }, os: { type: "Linux", name: "Ubuntu", architecture: "x86_64", version: "18.04" } }
+2019-02-14T07:30:30.769+0000 I NETWORK  [conn44] received client metadata from 192.168.2.10:33766 conn44: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:30:30.770+0000 I NETWORK  [conn45] received client metadata from 192.168.2.10:33768 conn45: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:30:30.775+0000 I NETWORK  [conn45] end connection 192.168.2.10:33768 (15 connections now open)
+2019-02-14T07:30:30.775+0000 I NETWORK  [conn44] end connection 192.168.2.10:33766 (14 connections now open)
+2019-02-14T07:30:30.777+0000 I NETWORK  [conn46] received client metadata from 192.168.2.10:33770 conn46: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:30:30.778+0000 I NETWORK  [conn47] received client metadata from 192.168.2.10:33772 conn47: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:30:30.789+0000 I STORAGE  [conn47] createCollection: tttt.thresholds with generated UUID: 51f30ddc-6b17-4e33-b651-12557783ee8a
+2019-02-14T07:30:30.811+0000 I NETWORK  [conn47] end connection 192.168.2.10:33772 (15 connections now open)
+2019-02-14T07:30:30.811+0000 I NETWORK  [conn46] end connection 192.168.2.10:33770 (14 connections now open)
+2019-02-14T07:30:31.021+0000 I NETWORK  [conn48] received client metadata from 192.168.2.10:33776 conn48: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:30:31.023+0000 I NETWORK  [conn49] received client metadata from 192.168.2.10:33778 conn49: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:30:31.049+0000 I NETWORK  [conn39] end connection 192.168.2.10:33462 (15 connections now open)
+2019-02-14T07:30:31.049+0000 I NETWORK  [conn38] end connection 192.168.2.10:33460 (14 connections now open)
+2019-02-14T07:30:31.763+0000 I NETWORK  [conn50] received client metadata from 192.168.2.10:33782 conn50: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:30:31.766+0000 I NETWORK  [conn51] received client metadata from 192.168.2.10:33784 conn51: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:30:31.794+0000 I NETWORK  [conn41] end connection 192.168.2.10:33482 (15 connections now open)
+2019-02-14T07:30:31.794+0000 I NETWORK  [conn40] end connection 192.168.2.10:33480 (14 connections now open)
+2019-02-14T07:30:36.174+0000 I NETWORK  [conn52] received client metadata from 192.168.2.10:33816 conn52: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:30:36.176+0000 I NETWORK  [conn53] received client metadata from 192.168.2.10:33818 conn53: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:30:36.181+0000 I NETWORK  [conn52] end connection 192.168.2.10:33816 (15 connections now open)
+2019-02-14T07:30:36.181+0000 I NETWORK  [conn53] end connection 192.168.2.10:33818 (14 connections now open)
+2019-02-14T07:30:36.183+0000 I NETWORK  [conn54] received client metadata from 192.168.2.10:33820 conn54: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:30:36.184+0000 I NETWORK  [conn55] received client metadata from 192.168.2.10:33822 conn55: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:30:36.197+0000 I NETWORK  [conn55] end connection 192.168.2.10:33822 (15 connections now open)
+2019-02-14T07:30:36.197+0000 I NETWORK  [conn54] end connection 192.168.2.10:33820 (14 connections now open)
+2019-02-14T07:31:31.019+0000 I NETWORK  [conn56] received client metadata from 192.168.2.10:34062 conn56: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:31:31.021+0000 I NETWORK  [conn57] received client metadata from 192.168.2.10:34064 conn57: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:31:31.046+0000 I NETWORK  [conn49] end connection 192.168.2.10:33778 (15 connections now open)
+2019-02-14T07:31:31.046+0000 I NETWORK  [conn48] end connection 192.168.2.10:33776 (14 connections now open)
+2019-02-14T07:31:31.750+0000 I NETWORK  [conn58] received client metadata from 192.168.2.10:34076 conn58: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:31:31.751+0000 I NETWORK  [conn59] received client metadata from 192.168.2.10:34078 conn59: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:31:31.758+0000 I NETWORK  [conn51] end connection 192.168.2.10:33784 (15 connections now open)
+2019-02-14T07:31:31.758+0000 I NETWORK  [conn50] end connection 192.168.2.10:33782 (14 connections now open)
+2019-02-14T07:31:50.109+0000 I NETWORK  [conn60] received client metadata from 192.168.2.10:34168 conn60: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:31:50.110+0000 I NETWORK  [conn61] received client metadata from 192.168.2.10:34170 conn61: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:31:50.115+0000 I NETWORK  [conn61] end connection 192.168.2.10:34170 (15 connections now open)
+2019-02-14T07:31:50.115+0000 I NETWORK  [conn60] end connection 192.168.2.10:34168 (14 connections now open)
+2019-02-14T07:31:50.118+0000 I NETWORK  [conn62] received client metadata from 192.168.2.10:34172 conn62: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:31:50.118+0000 I NETWORK  [conn63] received client metadata from 192.168.2.10:34174 conn63: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:31:50.132+0000 I NETWORK  [conn63] end connection 192.168.2.10:34174 (15 connections now open)
+2019-02-14T07:31:50.132+0000 I NETWORK  [conn62] end connection 192.168.2.10:34172 (14 connections now open)
+2019-02-14T07:32:25.718+0000 I NETWORK  [conn64] received client metadata from 192.168.2.10:34346 conn64: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:32:25.720+0000 I NETWORK  [conn65] received client metadata from 192.168.2.10:34348 conn65: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:32:25.725+0000 I NETWORK  [conn65] end connection 192.168.2.10:34348 (15 connections now open)
+2019-02-14T07:32:25.726+0000 I NETWORK  [conn64] end connection 192.168.2.10:34346 (14 connections now open)
+2019-02-14T07:32:25.727+0000 I NETWORK  [conn66] received client metadata from 192.168.2.10:34350 conn66: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:32:25.729+0000 I NETWORK  [conn67] received client metadata from 192.168.2.10:34352 conn67: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:32:25.743+0000 I NETWORK  [conn67] end connection 192.168.2.10:34352 (15 connections now open)
+2019-02-14T07:32:25.743+0000 I NETWORK  [conn66] end connection 192.168.2.10:34350 (14 connections now open)
+2019-02-14T07:32:31.016+0000 I NETWORK  [conn68] received client metadata from 192.168.2.10:34378 conn68: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:32:31.017+0000 I NETWORK  [conn69] received client metadata from 192.168.2.10:34380 conn69: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:32:31.024+0000 I NETWORK  [conn57] end connection 192.168.2.10:34064 (15 connections now open)
+2019-02-14T07:32:31.024+0000 I NETWORK  [conn56] end connection 192.168.2.10:34062 (14 connections now open)
+2019-02-14T07:32:31.750+0000 I NETWORK  [conn70] received client metadata from 192.168.2.10:34394 conn70: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:32:31.750+0000 I NETWORK  [conn71] received client metadata from 192.168.2.10:34396 conn71: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:32:31.757+0000 I NETWORK  [conn59] end connection 192.168.2.10:34078 (15 connections now open)
+2019-02-14T07:32:31.757+0000 I NETWORK  [conn58] end connection 192.168.2.10:34076 (14 connections now open)
+2019-02-14T07:32:55.758+0000 I NETWORK  [conn72] received client metadata from 172.20.0.1:49692 conn72: { driver: { name: "MongoDB Internal Client", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
+2019-02-14T07:32:55.761+0000 I NETWORK  [conn73] received client metadata from 172.20.0.1:49698 conn73: { driver: { name: "MongoDB Internal Client", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
+2019-02-14T07:32:55.764+0000 I NETWORK  [conn73] end connection 172.20.0.1:49698 (15 connections now open)
+2019-02-14T07:32:56.744+0000 I CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
+2019-02-14T07:32:56.744+0000 I STORAGE  [LogicalSessionCacheRefresh] createCollection: config.system.sessions with generated UUID: f1d5bda7-931c-4d0b-ac77-8aaa215c2640
+2019-02-14T07:32:56.785+0000 I INDEX    [LogicalSessionCacheRefresh] build index on: config.system.sessions properties: { v: 2, key: { lastUse: 1 }, name: "lsidTTLIndex", ns: "config.system.sessions", expireAfterSeconds: 1800 }
+2019-02-14T07:32:56.785+0000 I INDEX    [LogicalSessionCacheRefresh] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
+2019-02-14T07:32:56.785+0000 I INDEX    [LogicalSessionCacheRefresh] build index done.  scanned 0 total records. 0 secs
+2019-02-14T07:33:04.683+0000 I NETWORK  [conn74] received client metadata from 192.168.2.10:34560 conn74: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:33:04.685+0000 I NETWORK  [conn75] received client metadata from 192.168.2.10:34562 conn75: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:33:04.691+0000 I NETWORK  [conn75] end connection 192.168.2.10:34562 (16 connections now open)
+2019-02-14T07:33:04.691+0000 I NETWORK  [conn74] end connection 192.168.2.10:34560 (15 connections now open)
+2019-02-14T07:33:04.695+0000 I NETWORK  [conn76] received client metadata from 192.168.2.10:34564 conn76: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:33:04.696+0000 I NETWORK  [conn77] received client metadata from 192.168.2.10:34566 conn77: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.7.0.final.0" }
+2019-02-14T07:33:04.711+0000 I NETWORK  [conn77] end connection 192.168.2.10:34566 (16 connections now open)
+2019-02-14T07:33:04.711+0000 I NETWORK  [conn76] end connection 192.168.2.10:34564 (15 connections now open)
+2019-02-14T07:33:31.019+0000 I NETWORK  [conn78] received client metadata from 192.168.2.10:34700 conn78: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:33:31.022+0000 I NETWORK  [conn79] received client metadata from 192.168.2.10:34702 conn79: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:33:31.050+0000 I NETWORK  [conn69] end connection 192.168.2.10:34380 (16 connections now open)
+2019-02-14T07:33:31.050+0000 I NETWORK  [conn68] end connection 192.168.2.10:34378 (15 connections now open)
+2019-02-14T07:33:31.750+0000 I NETWORK  [conn80] received client metadata from 192.168.2.10:34710 conn80: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:33:31.750+0000 I NETWORK  [conn81] received client metadata from 192.168.2.10:34712 conn81: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:33:31.757+0000 I NETWORK  [conn71] end connection 192.168.2.10:34396 (16 connections now open)
+2019-02-14T07:33:31.757+0000 I NETWORK  [conn70] end connection 192.168.2.10:34394 (15 connections now open)
+2019-02-14T07:34:31.017+0000 I NETWORK  [conn82] received client metadata from 192.168.2.10:34988 conn82: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:34:31.018+0000 I NETWORK  [conn83] received client metadata from 192.168.2.10:34990 conn83: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:34:31.031+0000 I NETWORK  [conn79] end connection 192.168.2.10:34702 (16 connections now open)
+2019-02-14T07:34:31.031+0000 I NETWORK  [conn78] end connection 192.168.2.10:34700 (15 connections now open)
+2019-02-14T07:34:31.753+0000 I NETWORK  [conn84] received client metadata from 192.168.2.10:34998 conn84: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:34:31.755+0000 I NETWORK  [conn85] received client metadata from 192.168.2.10:35000 conn85: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:34:31.767+0000 I NETWORK  [conn81] end connection 192.168.2.10:34712 (16 connections now open)
+2019-02-14T07:34:31.767+0000 I NETWORK  [conn80] end connection 192.168.2.10:34710 (15 connections now open)
+2019-02-14T07:35:31.016+0000 I NETWORK  [conn86] received client metadata from 192.168.2.10:35326 conn86: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:35:31.017+0000 I NETWORK  [conn87] received client metadata from 192.168.2.10:35328 conn87: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:35:31.023+0000 I NETWORK  [conn83] end connection 192.168.2.10:34990 (16 connections now open)
+2019-02-14T07:35:31.023+0000 I NETWORK  [conn82] end connection 192.168.2.10:34988 (15 connections now open)
+2019-02-14T07:35:31.750+0000 I NETWORK  [conn88] received client metadata from 192.168.2.10:35336 conn88: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:35:31.751+0000 I NETWORK  [conn89] received client metadata from 192.168.2.10:35338 conn89: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:35:31.759+0000 I NETWORK  [conn84] end connection 192.168.2.10:34998 (16 connections now open)
+2019-02-14T07:35:31.759+0000 I NETWORK  [conn85] end connection 192.168.2.10:35000 (15 connections now open)
+2019-02-14T07:36:31.019+0000 I NETWORK  [conn90] received client metadata from 192.168.2.10:35650 conn90: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:36:31.021+0000 I NETWORK  [conn91] received client metadata from 192.168.2.10:35652 conn91: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:36:31.050+0000 I NETWORK  [conn87] end connection 192.168.2.10:35328 (16 connections now open)
+2019-02-14T07:36:31.050+0000 I NETWORK  [conn86] end connection 192.168.2.10:35326 (15 connections now open)
+2019-02-14T07:36:31.753+0000 I NETWORK  [conn92] received client metadata from 192.168.2.10:35654 conn92: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:36:31.755+0000 I NETWORK  [conn93] received client metadata from 192.168.2.10:35656 conn93: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:36:31.784+0000 I NETWORK  [conn89] end connection 192.168.2.10:35338 (16 connections now open)
+2019-02-14T07:36:31.784+0000 I NETWORK  [conn88] end connection 192.168.2.10:35336 (15 connections now open)
+2019-02-14T07:37:31.017+0000 I NETWORK  [conn94] received client metadata from 192.168.2.10:35946 conn94: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:37:31.018+0000 I NETWORK  [conn95] received client metadata from 192.168.2.10:35948 conn95: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:37:31.024+0000 I NETWORK  [conn91] end connection 192.168.2.10:35652 (16 connections now open)
+2019-02-14T07:37:31.024+0000 I NETWORK  [conn90] end connection 192.168.2.10:35650 (15 connections now open)
+2019-02-14T07:37:31.756+0000 I NETWORK  [conn96] received client metadata from 192.168.2.10:35952 conn96: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:37:31.759+0000 I NETWORK  [conn97] received client metadata from 192.168.2.10:35954 conn97: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:37:31.774+0000 I NETWORK  [conn93] end connection 192.168.2.10:35656 (16 connections now open)
+2019-02-14T07:37:31.774+0000 I NETWORK  [conn92] end connection 192.168.2.10:35654 (15 connections now open)
+2019-02-14T07:37:55.759+0000 I NETWORK  [conn98] received client metadata from 172.20.0.1:51272 conn98: { driver: { name: "MongoDB Internal Client", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
+2019-02-14T07:38:31.016+0000 I NETWORK  [conn99] received client metadata from 192.168.2.10:36264 conn99: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:38:31.017+0000 I NETWORK  [conn100] received client metadata from 192.168.2.10:36266 conn100: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:38:31.025+0000 I NETWORK  [conn95] end connection 192.168.2.10:35948 (17 connections now open)
+2019-02-14T07:38:31.026+0000 I NETWORK  [conn94] end connection 192.168.2.10:35946 (16 connections now open)
+2019-02-14T07:38:31.751+0000 I NETWORK  [conn101] received client metadata from 192.168.2.10:36270 conn101: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:38:31.751+0000 I NETWORK  [conn102] received client metadata from 192.168.2.10:36272 conn102: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:38:31.758+0000 I NETWORK  [conn96] end connection 192.168.2.10:35952 (17 connections now open)
+2019-02-14T07:38:31.758+0000 I NETWORK  [conn97] end connection 192.168.2.10:35954 (16 connections now open)
+2019-02-14T07:39:31.015+0000 I NETWORK  [conn103] received client metadata from 192.168.2.10:36562 conn103: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:39:31.015+0000 I NETWORK  [conn104] received client metadata from 192.168.2.10:36564 conn104: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:39:31.022+0000 I NETWORK  [conn100] end connection 192.168.2.10:36266 (17 connections now open)
+2019-02-14T07:39:31.022+0000 I NETWORK  [conn99] end connection 192.168.2.10:36264 (16 connections now open)
+2019-02-14T07:39:31.752+0000 I NETWORK  [conn105] received client metadata from 192.168.2.10:36582 conn105: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:39:31.754+0000 I NETWORK  [conn106] received client metadata from 192.168.2.10:36584 conn106: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:39:31.784+0000 I NETWORK  [conn102] end connection 192.168.2.10:36272 (17 connections now open)
+2019-02-14T07:39:31.784+0000 I NETWORK  [conn101] end connection 192.168.2.10:36270 (16 connections now open)
+2019-02-14T07:40:31.015+0000 I NETWORK  [conn107] received client metadata from 192.168.2.10:36862 conn107: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:40:31.015+0000 I NETWORK  [conn108] received client metadata from 192.168.2.10:36864 conn108: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:40:31.022+0000 I NETWORK  [conn104] end connection 192.168.2.10:36564 (17 connections now open)
+2019-02-14T07:40:31.022+0000 I NETWORK  [conn103] end connection 192.168.2.10:36562 (16 connections now open)
+2019-02-14T07:40:31.752+0000 I NETWORK  [conn109] received client metadata from 192.168.2.10:36876 conn109: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:40:31.754+0000 I NETWORK  [conn110] received client metadata from 192.168.2.10:36878 conn110: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:40:31.783+0000 I NETWORK  [conn106] end connection 192.168.2.10:36584 (17 connections now open)
+2019-02-14T07:40:31.783+0000 I NETWORK  [conn105] end connection 192.168.2.10:36582 (16 connections now open)
+2019-02-14T07:41:31.015+0000 I NETWORK  [conn111] received client metadata from 192.168.2.10:37182 conn111: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:41:31.015+0000 I NETWORK  [conn112] received client metadata from 192.168.2.10:37184 conn112: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:41:31.023+0000 I NETWORK  [conn108] end connection 192.168.2.10:36864 (17 connections now open)
+2019-02-14T07:41:31.023+0000 I NETWORK  [conn107] end connection 192.168.2.10:36862 (16 connections now open)
+2019-02-14T07:41:31.752+0000 I NETWORK  [conn113] received client metadata from 192.168.2.10:37194 conn113: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:41:31.754+0000 I NETWORK  [conn114] received client metadata from 192.168.2.10:37196 conn114: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:41:31.766+0000 I NETWORK  [conn110] end connection 192.168.2.10:36878 (17 connections now open)
+2019-02-14T07:41:31.766+0000 I NETWORK  [conn109] end connection 192.168.2.10:36876 (16 connections now open)
+2019-02-14T07:42:31.015+0000 I NETWORK  [conn115] received client metadata from 192.168.2.10:37510 conn115: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:42:31.015+0000 I NETWORK  [conn116] received client metadata from 192.168.2.10:37512 conn116: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:42:31.022+0000 I NETWORK  [conn111] end connection 192.168.2.10:37182 (17 connections now open)
+2019-02-14T07:42:31.022+0000 I NETWORK  [conn112] end connection 192.168.2.10:37184 (16 connections now open)
+2019-02-14T07:42:31.749+0000 I NETWORK  [conn117] received client metadata from 192.168.2.10:37522 conn117: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:42:31.750+0000 I NETWORK  [conn118] received client metadata from 192.168.2.10:37524 conn118: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:42:31.756+0000 I NETWORK  [conn114] end connection 192.168.2.10:37196 (17 connections now open)
+2019-02-14T07:42:31.756+0000 I NETWORK  [conn113] end connection 192.168.2.10:37194 (16 connections now open)
+2019-02-14T07:43:31.015+0000 I NETWORK  [conn119] received client metadata from 192.168.2.10:37874 conn119: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:43:31.016+0000 I NETWORK  [conn120] received client metadata from 192.168.2.10:37876 conn120: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:43:31.027+0000 I NETWORK  [conn116] end connection 192.168.2.10:37512 (17 connections now open)
+2019-02-14T07:43:31.027+0000 I NETWORK  [conn115] end connection 192.168.2.10:37510 (16 connections now open)
+2019-02-14T07:43:31.749+0000 I NETWORK  [conn121] received client metadata from 192.168.2.10:37886 conn121: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:43:31.749+0000 I NETWORK  [conn122] received client metadata from 192.168.2.10:37888 conn122: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:43:31.756+0000 I NETWORK  [conn117] end connection 192.168.2.10:37522 (17 connections now open)
+2019-02-14T07:43:31.756+0000 I NETWORK  [conn118] end connection 192.168.2.10:37524 (16 connections now open)
+2019-02-14T07:44:31.015+0000 I NETWORK  [conn123] received client metadata from 192.168.2.10:38216 conn123: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:44:31.015+0000 I NETWORK  [conn124] received client metadata from 192.168.2.10:38218 conn124: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:44:31.022+0000 I NETWORK  [conn120] end connection 192.168.2.10:37876 (17 connections now open)
+2019-02-14T07:44:31.022+0000 I NETWORK  [conn119] end connection 192.168.2.10:37874 (16 connections now open)
+2019-02-14T07:44:31.752+0000 I NETWORK  [conn125] received client metadata from 192.168.2.10:38228 conn125: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:44:31.754+0000 I NETWORK  [conn126] received client metadata from 192.168.2.10:38230 conn126: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
+2019-02-14T07:44:31.782+0000 I NETWORK  [conn122] end connection 192.168.2.10:37888 (17 connections now open)
+2019-02-14T07:44:31.782+0000 I NETWORK  [conn121] end connection 192.168.2.10:37886 (16 connections now open)

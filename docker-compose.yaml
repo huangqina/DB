@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  db:
+    image: mongo:3.6.9
+    volumes:
+     - ./data:/data/db
+    restart: unless-stopped
+    ports: 
+     - "27017:27017"
+    command:    mongod --config /data/db/mongod.yml
+
+  db2:
+    image: mongo:3.6.9
+    volumes:
+     - ./data2:/data/db
+    restart: unless-stopped
+    ports: 
+     - "27018:27017"
+    command:      mongod --config /data/db/mongod.yml
+
+  db3:
+    image: mongo:3.6.9
+    volumes:
+     - ./data3:/data/db
+    restart: unless-stopped
+    ports: 
+     - "27019:27017"
+    command: mongod --config /data/db/mongod.yml
+  DB_inter:
+    image: ubuntu-flask2:latest
+    network_mode: host
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:  
+      - ./:/home
+    command: 
+      - /bin/sh
+      - -c
+      - |
+         cd /home
+         python3 ./DB.py
+#python3 code/app.py
+#gunicorn interface:app -c gunicorn.conf.py

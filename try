@@ -1,0 +1,6 @@
+#!/bin/bash
+
+sudo docker exec -i db_db_1 /bin/bash <<-EOF
+      /data/db/config
+      exit
+EOF

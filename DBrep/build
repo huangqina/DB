@@ -1,0 +1,12 @@
+#!/bin/bash
+sudo chmod 777 -R data
+sudo rm -rf data
+sudo chmod 600 ./keyFile
+sudo chmod 777 ./start
+mkdir data
+cd data
+cp ../mongod.yml ./
+cp ../config ./
+cp ../keyFile ./
+mkdir logs
+

@@ -1,0 +1,13 @@
+systemLog:
+  destination: file
+  path: "/data/db/logs/mongodb.log"
+  logAppend: true
+  quiet: true
+storage:
+  dbPath: "/data/db"
+  journal:
+    enabled: true
+security:
+  keyFile: "/data/db/keyFile" 
+replication:
+  replSetName: "rs" 

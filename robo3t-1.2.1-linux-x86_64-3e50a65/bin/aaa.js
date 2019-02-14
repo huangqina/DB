@@ -1,0 +1,1 @@
+db.st.insert({tags:["book","apple"]})

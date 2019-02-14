@@ -1,0 +1,35 @@
+#!/bin/bash
+sudo chmod 777 -R data
+sudo rm -rf data
+sudo chmod 777 -R data2
+sudo rm -rf data2
+sudo chmod 777 -R data3
+sudo rm -rf data3
+sudo chmod 600 ./keyFile
+sudo chmod 777 ./start
+sudo chmod 777 ./try
+sudo chmod 777 ./config
+sudo chmod 777 ./rebuild
+sudo chmod 777 ./update
+mkdir data
+mkdir data2
+mkdir data3
+cd data
+cp ../mongod.yml ./
+cp ../config ./
+cp ../keyFile ./
+mkdir logs
+cd ../data2
+cp ../mongod.yml ./
+cp ../keyFile ./
+mkdir logs
+cd ../data3
+cp ../mongod.yml ./
+cp ../keyFile ./
+mkdir logs
+cd ../
+sudo docker-compose up&
+sleep 5
+./try&
+sleep 20
+./try

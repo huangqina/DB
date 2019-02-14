@@ -1,0 +1,13 @@
+#!/bin/bash
+ip='192.168.2.10'
+mongo <<-EOF
+     use admin
+     db.auth("root","123456") 
+     cfg = rs.config() 
+     cfg["members"][0].host='${ip}:27017'
+     cfg["members"][1].host='${ip}:27018'
+     cfg["members"][2].host='${ip}:27019'
+     rs.reconfig(cfg,{force:true})
+     exit
+EOF
+

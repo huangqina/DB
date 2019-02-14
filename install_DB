@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd ./dockerimg
+sudo dpkg -i docker.io_18.06.1-0ubuntu1~18.04.1_amd64.deb
+sudo docker load -i ubuntu_flask.tar 
+sudo docker load -i mongodb.tar 
+pip install --no-index --find-links="docker-compose" docker-compose
+
