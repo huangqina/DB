@@ -1,5 +1,5 @@
 db.panel.aggregate([
-    {$project:{"_id":0}},
+    {$project:{"_id":0}},{$sort:({barcode:1})},
     {$lookup: {'from':"panel_defect","pipeline":[
          
          

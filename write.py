@@ -5,7 +5,7 @@ from con2 import connect2
 c = connect2()
 db = c['tttt']
 data = pd.DataFrame(list(db.panel.aggregate([
-    {'$project':{"_id":0}},
+    {'$project':{"_id":0}},{'$sort':({'barcode':1})},
     {'$lookup': {'from':"panel_defect","pipeline":[
          {'$lookup':{'from':"defect","localField":"defect_id",   "foreignField":"_id","as":"defect"}
          },{'$project':
