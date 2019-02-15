@@ -1,0 +1,6 @@
+,by,position,status,type
+0,AI,"[1, 2]",false,bc
+1,AI,"[5, 5]",true,bc
+2,AI,"[1, 1]",true,cr
+3,OP,"[6, 6]",true,bc
+4,OP,"{'h': 20, 'x': 5, 'y': 11, 'c': '5 11', 'w': 20}",true,mr
