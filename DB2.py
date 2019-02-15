@@ -484,7 +484,42 @@ def panel_add():
         logger.error('json file error  '+str(e))
        
         return str('json file error  '+str(e)),400
+    defects = []
+    status = []
+    status.append({'result':info['ai_result'],'by':'AI'})
+    status.append({'result':info['gui_result'],'by':'OP'})
+    if info['ai_defects']:
+        for k in info['ai_defects'].keys():
+            for v in info['ai_defects'][k]:
+                if info['gui_defects'][k] and v in info['gui_defects'][k]:
+                    defects.append({'type':k,'position':v,'by':'AI','status':'true'})
+                    #PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'AI','status':'true'})
+                    info['gui_defects'][k].remove(v)
+                elif info['gui_defects'][k] and v not in info['gui_defects'][k]:
+                    defects.append({'type':k,'position':v,'by':'AI','status':'false'})
+                    #PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'AI','status':'false'})
+    if info['gui_defects']:
+        for k in info['gui_defects'].keys():
+            if info['gui_defects'][k]:
+                for v in info['gui_defects'][k]:
+                    defects.append({'type':k,'position':v,'by':'OP','status':'true'})
+                    #PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'OP','status':'true'})
+    dic = {}
     try:
+        if info['thresholds']:
+            for k in info['thresholds'].keys():
+                dic[k] = info['thresholds'][k]
+    except BaseException:
+        pass
+    try:
+        PANEL.insert({'barcode' : info['barcode'], 'cell_type': info['cell_type'],'cell_amount': info['cell_amount'],'cell_shape':info['cell_shape'],'display_mode': info['display_mode'],'el_no':info['el_no'],'create_time':info['create_time'],'defects':defects,'status':status,'thresholds':dic})
+    except BaseException as e:
+        logger.error('barcode already exits')
+        return str(e),400
+    #display_mode.insert({'display_mode': info['display_mode']})
+    #module_no.insert({'module_no': info['module_no']})
+    EL.insert({'el_no': info['el_no']})
+    '''try:
         panel_id = PANEL.insert({'barcode' : info['barcode'], 'cell_type': info['cell_type'],'cell_amount': info['cell_amount'],'cell_shape':info['cell_shape'],'display_mode': info['display_mode'],'el_no':info['el_no'],'create_time':info['create_time']})
     except BaseException as e:
         logger.error('barcode already exits')
@@ -518,7 +553,7 @@ def panel_add():
             if info['gui_defects'][k]:
                 for v in info['gui_defects'][k]:
                     defect_id = DEFECT.insert({'type':k,'position':v,'by':'OP','time':info['create_time']})
-                    PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'OP','status':'true'})
+                    PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'OP','status':'true'})'''
     logger.info('add panel')
     return jsonify(1),200
     #return 'OK',200
