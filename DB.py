@@ -91,10 +91,10 @@ if c.is_primary:
     #db.panel.ensure_index([("Barcode", 1)])
 #mongo.db.el
     db.panel_status.create_index([("time", 1)])
-    db.panel_status.create_index([("panel_ID", 1)]) 
+    db.panel_status.create_index([("panel_id", 1)]) 
     db.defect.create_index([("time", 1)])
-    db.panel_defect.create_index([("panel_ID", 1)])
-    db.panel_defect.create_index([("defect_ID", 1)])
+    db.panel_defect.create_index([("panel_id", 1)])
+    db.panel_defect.create_index([("defect_id", 1)])
 @app.route('/', methods=['GET'])
 def show():
   #t = i['Defects'][0]['Defect']

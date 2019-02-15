@@ -91,10 +91,10 @@ if c.is_primary:
     #db.panel.ensure_index([("Barcode", 1)])
 #mongo.db.el
     db.panel_status.create_index([("time", 1)])
-    db.panel_status.create_index([("panel_ID", 1)]) 
+    db.panel_status.create_index([("panel_id", 1)]) 
     db.defect.create_index([("time", 1)])
-    db.panel_defect.create_index([("panel_ID", 1)])
-    db.panel_defect.create_index([("defect_ID", 1)])
+    db.panel_defect.create_index([("panel_id", 1)])
+    db.panel_defect.create_index([("defect_id", 1)])
 @app.route('/', methods=['GET'])
 def show():
   #t = i['Defects'][0]['Defect']
@@ -514,7 +514,7 @@ def panel_add():
     try:
         PANEL.insert({'barcode' : info['barcode'], 'cell_type': info['cell_type'],'cell_amount': info['cell_amount'],'cell_shape':info['cell_shape'],'display_mode': info['display_mode'],'el_no':info['el_no'],'create_time':info['create_time'],'defects':defects,'status':status,'thresholds':dic})
     except BaseException as e:
-        logger.error('barcode already exits')
+        logger.error('barcode already exists')
         return str(e),400
     #display_mode.insert({'display_mode': info['display_mode']})
     #module_no.insert({'module_no': info['module_no']})
