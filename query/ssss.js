@@ -1,0 +1,1 @@
+db.getCollection('panel').aggregate([{'$match':{'create_time':{'$gte':0,'$lt':1550156400.0}}},{'$project':{'_id':0,'display_mode':0,'thresholds':0,'cell_shape':0,'cell_amount':0,'cell_type':0,'defects':0}}])

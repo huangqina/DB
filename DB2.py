@@ -87,7 +87,7 @@ if c.is_primary:
     db.gui_setting.ensure_index([("gui_no",1)],unique=True)
     db.panel.create_index([("barcode", 1)])
     db.el_config.ensure_index([("el_no",1)],unique=True)
-    db.panel.ensure_index([("barcode",1),("create_time",1)],unique=True)
+    db.panel.ensure_index([("barcode",1),("create_time",1),("el_no",1)],unique=True)
     #db.panel.ensure_index([("Barcode", 1)])
 #mongo.db.el
     db.panel_status.create_index([("time", 1)])
@@ -565,17 +565,18 @@ def barcde_find():
     Barcode = json.loads(data.decode('utf-8'))
     Barcode = Barcode["barcode"]
     #Barcode = request.args['Barcode']
-    I = list(db.panel.find({"barcode" : Barcode}).limit(1).sort([("_id" , -1)]))
-    if I:
+    I = list(db.panel.aggregate([{'$match':{'barcode':Barcode}},{'$project':{'_id':0,'thresholds':0}}]))
+    '''I = list(db.panel.find({"barcode" : Barcode}).limit(1).sort([("_id" , -1)]))'''
+    '''if I:
         ID = I[0]['_id']
     else: 
-        ID = -1
+        ID = -1'''
     #username = user.find_one({"username":username}) 
     #if username: 
     #    return "你查找的用户名：" + username["username"] + " 密码是：" + username["password"] 
     #else: 
     #    return "你查找的用户并不存在!" 
-    k = list(collection.aggregate([
+    '''k = list(collection.aggregate([
     
     {'$match':{"_id":ID}},
     {'$project':{"_id":0}},
@@ -585,12 +586,12 @@ def barcde_find():
          
          {'$lookup':{'from':"defect","localField":"defect_id",   "foreignField":"_id","as":"defect"}
          },{'$project':
-         {"_id":0,"defect_id":0,"panel_id":0}},{'$project':{"defect":{"_id":0}}}],"as": "defects"}}]))
+         {"_id":0,"defect_id":0,"panel_id":0}},{'$project':{"defect":{"_id":0}}}],"as": "defects"}}]))'''
    # a=str('ID:'+str(k[0]['ID'])+'  '+'Barcode:' + str(k[0]['Barcode'])+'  '+'type:'+str(k[0]['type'])+'  '+ 'size:'+ str(k[0]['size']) +'  '+'EL_no:'+ str(k[0]['EL_no']))
 
     #return str(a)+'\n'+str(k[0]['Defects'])
     #return str(k[0]['Defects'])
-    return jsonify(k)
+    return jsonify(I[0])
     # for i in k['Defects']:
           #  print(i['Defect'])
 @app.route('/panel/check_last', methods=['GET','POST'])
@@ -751,4 +752,4 @@ def defecttime():
 if __name__ == '__main__':
 
     # app.run(host = '0.0.0.0', por)t = 80, debug = True)
-    app.run(host = '0.0.0.0', port = 5000, debug = True)
+    app.run(host = '0.0.0.0', port = 5001, debug = True)

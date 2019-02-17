@@ -16,7 +16,7 @@ data_total = []
 missrate = []
 st = "2019-2-15 22:00:00"
 start = time.mktime(time.strptime(st,"%Y-%m-%d %H:%M:%S"))
-en = "2019-2-16 23:00:00"
+en = "2019-2-17 23:00:00"
 end = time.mktime(time.strptime(en,"%Y-%m-%d %H:%M:%S"))
 #for barcode in range(10):
     #ID = db.panel.find_one({"barcode":str(barcode)})
