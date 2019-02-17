@@ -36,19 +36,42 @@ data_overkill = list(db.panel.aggregate([{'$unwind':'$defects'},{'$match':{'crea
         '_id' :{ '_id':'$_id','by':'$defects.by','barcode':'$barcode','el_no':'$el_no','create_time':'$create_time'}
             ,
         'total':{"$sum":1}}},]))
+data_true = list(db.panel.aggregate([{'$match':{'create_time':{'$gte':start,'$lt':end},'defects':[]}},
+   {"$group":{
+        '_id' :{ '_id':'$_id','barcode':'$barcode','el_no':'$el_no','create_time':'$create_time'}
+            ,
+        'total':{"$sum":1}}},]))
+
 for i in data_total:
 	dict1 = i["_id"]
 	dict1["AI_total"] = i['total']
+	del dict1['by']
+	dict1["OP"] = 0
+	dict1["AI_overkill"] = 0
 	for j in data_miss:
 		if j["_id"]["_id"] == i["_id"]['_id']:
-			dict1["AI_miss"] = j['miss']
+			dict1["AI_overkill"] = j['miss']
 			data_miss.remove(j)
+			break
 	for x in data_overkill:
 		if x["_id"]["_id"] == i["_id"]['_id']:
 			dict1["OP"] = x['total']
 			data_overkill.remove(x)
+			break
 	data.append(dict1)
-		
+for i in data_overkill:
+	dict1 = i["_id"]
+	del dict1['by']
+	dict1["AI_total"] = 0
+	dict1["AI_overkill"] = 0
+	dict1["OP"] = i['total']
+	data.append(dict1)		
+for i in data_true:
+	dict1 = i["_id"]
+	dict1["AI_total"] = 0
+	dict1["AI_overkill"] = 0
+	dict1["OP"] = 0
+	data.append(dict1)	
 data = pd.DataFrame(data)
 #print(data)
 data.to_csv('4.csv',encoding='utf-8')
