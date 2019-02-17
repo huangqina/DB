@@ -40,6 +40,6 @@ services:
       - -c
       - |
          cd /home
-         python3 ./DB.py
+         python3 ./DB2.py
 #python3 code/app.py
 #gunicorn interface:app -c gunicorn.conf.py

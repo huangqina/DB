@@ -494,8 +494,9 @@ def panel_add():
                 if info['gui_defects'][k] and v in info['gui_defects'][k]:
                     defects.append({'type':k,'position':v,'by':'AI','status':'true'})
                     #PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'AI','status':'true'})
+                    defects.append({'type':k,'position':v,'by':'OP','status':'true'})
                     info['gui_defects'][k].remove(v)
-                elif info['gui_defects'][k] and v not in info['gui_defects'][k]:
+                elif not info['gui_defects'][k] or (info['gui_defects'][k] and v not in info['gui_defects'][k]):
                     defects.append({'type':k,'position':v,'by':'AI','status':'false'})
                     #PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'AI','status':'false'})
     if info['gui_defects']:
