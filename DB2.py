@@ -120,6 +120,12 @@ def add_user():
     log = db.user_log
     data = request.data
     info = json.loads(data.decode('utf-8'))
+    if not info["user_name"]:
+        logger.error('user_name null')
+        return 'user_name null',400
+    if not info["user_pw"]:
+        logger.error('user_pw null')
+        return 'user_pw null',400
     try:
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if AD:
@@ -167,11 +173,14 @@ def user_modify():
             AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
             #I = user.find_one({"user_name" : info["user_name"],"activate" : 1})
             for i in info["changed_items"].keys():
+                if not info["changed_items"][i]:
+                    logger.error("user_change is null")
+                    return 'user_change is null',400
                 I[i] = info["changed_items"][i]
                 change_list.append(i)
             changes = '_'.join(change_list) 
             user.update({"_id" : I["_id"],"activate" : 1},I)
-            log.insert({'admin_id' : AD['_id'],'user_name' : info['name'],'user_id' : I['_id'],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_change_user:%s_%s"%(info["admin_name"],info["user_name"],changes)})
+            log.insert({'admin_id' : AD['_id'],'user_name' : info['user_name'],'user_id' : I['_id'],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_change_user:%s_%s"%(info["admin_name"],info["user_name"],changes)})
             logger.info("user_modify_%s"%(info["user_name"]))
             return jsonify(1),200
         else:
@@ -766,4 +775,3 @@ if __name__ == '__main__':
 
     # app.run(host = '0.0.0.0', por)t = 80, debug = True)
     app.run(host = '0.0.0.0', port = 5001, debug = True)
-
