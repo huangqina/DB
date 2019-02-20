@@ -603,9 +603,9 @@ def check_last():
     #Barcode = request.args['Barcode']
     I = panel.find_one({"barcode" : info["barcode"],"create_time" : info["create_time"]}) 
     if I:
-        return 1
+        return jsonify(1)
     else:
-        return 0
+        return jsonify(0)
 @app.route('/OK/find', methods=['GET','POST']) 
 def findOK(): 
     data = request.data
@@ -754,3 +754,4 @@ if __name__ == '__main__':
 
     # app.run(host = '0.0.0.0', por)t = 80, debug = True)
     app.run(host = '0.0.0.0', port = 5001, debug = True)
+
