@@ -142,9 +142,9 @@ def del_user():
     try:
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if AD:
-            I = user.find_one({"user_name" : info["user_name"],"user_pw" : info["user_pw"]})
+            I = user.find_one({"user_name" : info["user_name"]})
             I["activate"] = 0
-            I = user.update({"user_name" : info["user_name"],"user_pw" : info["user_pw"]},I)
+            user.update({"user_name" : info["user_name"]},I)
             log.insert({'user_id' : I['_id'],'admin_id' : AD['_id'],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_del_user_%s"%(info["admin_name"],info["user_name"])})
             logger.info("user_del_%s"%(info["user_name"]))
             return jsonify(1),200
@@ -170,7 +170,7 @@ def user_modify():
                 I[i] = info["changed_items"][i]
                 change_list.append(i)
             changes = '_'.join(change_list) 
-            I = user.update({"_id" : I["_id"],"activate" : 1},I)
+            user.update({"_id" : I["_id"],"activate" : 1},I)
             log.insert({'admin_id' : AD['_id'],'user_name' : info['name'],'user_id' : I['_id'],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_change_user:%s_%s"%(info["admin_name"],info["user_name"],changes)})
             return jsonify(1),200
         else:
@@ -190,7 +190,7 @@ def user_password_change():
         if AD:
             I = user.find_one({"name" : info["user_name"],"activate" : 1})
             I["pw"] = info["user_pw"]
-            I = user.update({"name" : info["user_name"],"activate" : 1},I)
+            user.update({"name" : info["user_name"],"activate" : 1},I)
             log.insert({'user_id' : AD['_id'],'user_name' : info["admin_name"], 'time': info['time'],'action':"%s_password_change{%s}"%(info["admin_name"],info["user_name"])})
             logger.info("password_change{%s}"%(info["user_name"]))
             return jsonify(1),200
