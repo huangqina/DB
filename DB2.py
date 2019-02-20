@@ -172,6 +172,7 @@ def user_modify():
             changes = '_'.join(change_list) 
             user.update({"_id" : I["_id"],"activate" : 1},I)
             log.insert({'admin_id' : AD['_id'],'user_name' : info['name'],'user_id' : I['_id'],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_change_user:%s_%s"%(info["admin_name"],info["user_name"],changes)})
+            logger.info("user_modify_%s"%(info["user_name"]))
             return jsonify(1),200
         else:
             logger.error("user:%s didn't exist"%(info["admin_name"]))
@@ -238,6 +239,7 @@ def login_admin():
             result["gui_setting"] = list(G)
             T = thresholds.find(projection={"_id":0})
             result["thresholds"] = list(T)
+            logger.info("admin_login_%s"%(info["user_name"]))
             return jsonify(result), 200
         else:
             logger.error("user:%s didn't exist"%(info["user_name"]))
@@ -276,6 +278,7 @@ def el_config_change():
             changes = '_'.join(change_list) 
             el_config.update({"el_no" : info["el_no"]},EL)
             log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'el_id' : EL['_id'],'el_no' : info["el_no"], 'time': info['time'],'action':"%s_change_el_config:%s_%s"%(info["admin_name"],info["el_no"],changes)})
+            logger.info('el_config_modify')
             return jsonify(1),200
         else:
             logger.error("el_no:%s didn't exist"%(info["admin_name"]))
@@ -301,6 +304,7 @@ def gui_config_modify():
             changes = '_'.join(change_list) 
             gui_setting.update({"gui_no" : info["gui_no"]},GUI)
             log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'gui_id' : GUI['_id'],'gui_no' : info["gui_no"], 'time': info['time'],'action':"%s_change_gui_config:%s_%s"%(info["admin_name"],info["gui_no"],changes)})
+            logger.info('gui_config_modify')
             return jsonify(1),200
         else:
             logger.error("gui_no:%s didn't exist"%(info["admin_name"]))
@@ -326,6 +330,7 @@ def permission_modify():
             changes = '_'.join(change_list) 
             permission.update({"type" : info["type"]},P)
             log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'type_id' : P['_id'],'type' : info["type"], 'time': info['time'],'action':"%s_change_permission_config:%s_%s"%(info["admin_name"],info["type"],changes)})
+            logger.info('permission_modify')
             return jsonify(1),200
         else:
             logger.error("type:%s didn't exist"%(info["admin_name"]))
@@ -368,6 +373,7 @@ def el_config_display():
         #log.insert({'user_id' : info["admin_name"], 'time': info['time'],'action':"el_%s_config_change{%s}"%(info["el_no"],info["admin_name"])})
     a = el_config.find(projection={"_id":0})
     b = list(a)
+    logger.info('el_config_display')
     return jsonify(b)
 #@app.route('/el/config/check',methods=['POST'])
 #def el_config_check():
@@ -385,8 +391,10 @@ def el_config_check():
         AD = el_config.find_one({"el_no" : info["el_no"]},projection={"_id":0})
         if not AD:
             return 'null',400
+        logger.info('el_config_check')
         return jsonify(AD),200
     except BaseException as e:
+        logger.error(str(e))
         return str(e),400
 @app.route('/gui/config/check',methods=['POST','GET'])
 def gui_config_check():
@@ -402,8 +410,10 @@ def gui_config_check():
         AD = gui_setting.find_one({"gui_no" : info["gui_no"]},projection={"_id":0})
         if not AD:
             return 'null',400
+        logger.info('gui_config_check')
         return jsonify(AD),200
     except BaseException as e:
+        logger.error(str(e))
         return str(e),400
 #@app.route('/el/config/check',methods=['POST'])
 #def el_config_check():
@@ -454,6 +464,7 @@ def panel_add():
             return 'ai_result should be 0 or 1 or 2',400
         if not isinstance(info['ai_defects'], dict):
             #raise TypeError('ai_defects should be list')
+            logger.error('ai_defects should be dict')
             return 'ai_defects should be dict',400
         if info['ai_defects']:
             for k in info['ai_defects'].keys():
@@ -470,6 +481,7 @@ def panel_add():
             return 'gui_result should be 0 or 1',400
         if not isinstance(info['gui_defects'], dict):
             #raise TypeError('gui_defects should be list')
+            logger.error('gui_defects should be dict')
             return 'gui_defects should be dict',400
         if info['gui_defects']:
             for k in info['gui_defects'].keys():
