@@ -1,4 +1,5 @@
 import csv
+import os
 from con2 import connect2
 
 
@@ -24,9 +25,18 @@ db = c['tttt']
         return jsonify(1),200
     except BaseException as e:
         return str(e),400'''
-with open('permission.csv','r',newline='') as f:
+with open('./SETUP/permission.csv','r',newline='') as f:
     reader = csv.DictReader(f)
     for i in reader:
+        i['level_mng'] = int(i['level_mng'])
+        i['user_mng'] = int(i['user_mng'])
+        i['display_mode'] = int(i['display_mode'])
+        i['ai_module'] = int(i['ai_module'])
+        i['threshold'] = int(i['threshold'])
+        i['el_gui'] = int(i['el_gui'])
+        i['auto_manual'] = int(i['auto_manual'])
+        i['shift_mng'] = int(i['shift_mng'])
+        i['pic_upload'] = int(i['pic_upload'])
         try:
             AD = db.permission.find_one({"type" : i["type"]})
             if AD:
@@ -35,7 +45,7 @@ with open('permission.csv','r',newline='') as f:
                   db.permission.insert_one(i)
         except BaseException:
             pass
-with open('user.csv','r',newline='') as f:
+with open('./SETUP/user.csv','r',newline='') as f:
     reader = csv.DictReader(f)
     for i in reader:
         i['activate'] = int(1)
@@ -48,9 +58,11 @@ with open('user.csv','r',newline='') as f:
         except BaseException:
             pass
 
-with open('el_config.csv','r',newline='') as f:
+with open('./SETUP/el_config.csv','r',newline='') as f:
     reader = csv.DictReader(f)
     for i in reader:
+        i['cell_amount'] = int(i['cell_amount'])
+        i['display_mode'] = int(i['display_mode'])
         try:
             AD = db.el_config.find_one({"el_no" : i["el_no"]})
             if AD:
@@ -59,9 +71,14 @@ with open('el_config.csv','r',newline='') as f:
                   db.el_config.insert_one(i)
         except BaseException:
             pass
-with open('gui_config.csv','r',newline='') as f:
+with open('./SETUP/gui_config.csv','r',newline='') as f:
     reader = csv.DictReader(f)
+    #reader = csv.DictReader(f)
     for i in reader:
+        #print(i['gui_no'])
+        i['auto_time'] = int(i['auto_time'])
+        i['manual_time'] = int(i['manual_time'])
+        i['el_limit'] = int(i['el_limit'])
         try:
             AD = db.gui_setting.find_one({"gui_no" : i["gui_no"]})
             if AD:
@@ -70,9 +87,11 @@ with open('gui_config.csv','r',newline='') as f:
                   db.gui_setting.insert_one(i)
         except BaseException:
             pass
-with open('thresholds.csv','r',newline='') as f:
+with open('./SETUP/thresholds.csv','r',newline='') as f:
     reader = csv.DictReader(f)
     for i in reader:
+        i['cr_size'] = int(i['cr_size'])
+        i['cs_size'] = int(i['cs_size'])
         try:
             db.thresholds.insert_one(i)
         except BaseException:

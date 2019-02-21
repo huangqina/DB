@@ -329,7 +329,26 @@ def permission_modify():
     data = request.data
     change_list = []
     info = json.loads(data.decode('utf-8'))
+    AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
     try:
+        for i in info["changed_items"]:
+            P = permission.find_one({"type" : i["type"]})
+            if P:
+                for j in i.keys():
+                    P[j] = i[j]
+                    change_list.append(j)
+                changes = '_'.join(change_list) 
+                permission.update({"type" : i["type"]},P)
+                log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'type_id' : P['_id'],'type' : i["type"], 'time': info['time'],    'action':"%s_change_permission_config:%s_%s"%(info["admin_name"],i["type"],changes)})
+                logger.info('permission_modify')
+            else:
+                 logger.error("type:%s didn't exist"%(i["type"]))
+                 return jsonify("type didn't exist"), 422
+        return jsonify(1),200
+    except BaseException as e:
+        logger.error(str(e))
+        return str(e),400
+    '''try:
         P = permission.find_one({"type" : info["type"]})
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if P:
@@ -342,11 +361,11 @@ def permission_modify():
             logger.info('permission_modify')
             return jsonify(1),200
         else:
-            logger.error("type:%s didn't exist"%(info["admin_name"]))
-            return jsonify("type didn't exist"), 422
+             logger.error("type:%s didn't exist"%(info["admin_name"]))
+             return jsonify("type didn't exist"), 422
     except BaseException as e:
         logger.error(str(e))
-        return str(e),400
+        return str(e),400'''
 '''@app.route('/el/config/change',methods=['POST'])
 def el_config_change():
     el_config = db.el_config

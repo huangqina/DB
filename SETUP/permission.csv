@@ -1,0 +1,7 @@
+type,level_mng,user_mng,display_mode,ai_module,threshold,el_gui,auto_manual,shift_mng,pic_upload
+super admin,1,1,1,1,1,1,1,1,1
+yc admin,1,1,1,1,1,1,1,1,1
+quality admin,0,0,1,0,1,0,1,0,1
+production admin,0,1,1,1,0,1,1,1,1
+quality engineer,0,0,0,0,0,0,0,0,0
+production engineer,0,0,0,0,0,0,0,0,0

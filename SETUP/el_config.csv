@@ -1,0 +1,4 @@
+el_no,pre_wd_url,cell_type,cell_amount,cell_shape,display_mode,gui_no,gui_url,threshold_module
+Line1,192.168.3.131:8081,mono,72,full,1,no.1231,192.168.3.131:3000,1
+Line2,192.168.3.131:8082,mono,72,full,1,no.1231,192.168.3.131:3000,1
+Line3,192.168.3.131:8083,mono,72,full,1,no.1231,192.168.3.131:3000,1
