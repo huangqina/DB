@@ -11,6 +11,7 @@ from flask_apscheduler import APScheduler
 import logging
 import sys
 import logging.handlers
+import time
 #logging.basicConfig(filename="./log",level = logging.INFO,format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -90,11 +91,31 @@ if c.is_primary:
     db.panel.ensure_index([("barcode",1),("create_time",1),("el_no",1)],unique=True)
     #db.panel.ensure_index([("Barcode", 1)])
 #mongo.db.el
-    db.panel_status.create_index([("time", 1)])
-    db.panel_status.create_index([("panel_id", 1)]) 
-    db.defect.create_index([("time", 1)])
-    db.panel_defect.create_index([("panel_id", 1)])
-    db.panel_defect.create_index([("defect_id", 1)])
+    #db.panel_status.create_index([("time", 1)])
+    #db.panel_status.create_index([("panel_id", 1)]) 
+    #db.defect.create_index([("time", 1)])
+    #db.panel_defect.create_index([("panel_id", 1)])
+    #db.panel_defect.create_index([("defect_id", 1)])
+
+
+def update():
+    user = db.user
+    permission = db.permission
+    el_config = db.el_config
+    gui_setting = db.gui_setting
+    thresholds = db.thresholds
+    result = {}      
+    U = user.find({"activate":1},projection={"_id":0,"user_pw":0,"activate":0})
+    result["users"] = list(U)
+    P = permission.find(projection={"_id":0})
+    result["permission_mng"] = list(P)
+    E = el_config.find(projection={"_id":0})
+    result["line_setting"] = list(E)
+    G = gui_setting.find(projection={"_id":0})
+    result["gui_setting"] = list(G)
+    T = thresholds.find(projection={"_id":0})
+    result["thresholds"] = list(T)
+    return jsonify(result), 201
 @app.route('/', methods=['GET'])
 def show():
   #t = i['Defects'][0]['Defect']
@@ -116,6 +137,7 @@ def user_display():
     return jsonify(res)
 @app.route('/user/add',methods=['POST'])
 def add_user():
+    t = time.time()
     user = db.user
     log = db.user_log
     data = request.data
@@ -129,7 +151,7 @@ def add_user():
     try:
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if AD:
-            user.insert({"user_name" : info["user_name"],"user_pw" : info["user_pw"],"activate" : 1,"type":info["type"]})
+            user.insert({"user_name" : info["user_name"],"user_pw" : info["user_pw"],"activate" : 1,"type":info["type"],"update_time" : t})
             log.insert({'admin_id' : AD["_id"],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_add_user_%s"%(info["admin_name"],info["user_name"])})
             logger.info("user_add{%s}"%(info["user_name"]))
             return jsonify(1),200
@@ -138,9 +160,11 @@ def add_user():
             return jsonify("admin user didn't exist"), 400
     except BaseException as e:
         logger.error(str(e))
-        return str(e),400
+        return update()
+        #return str(e),400
 @app.route('/user/delete',methods=['POST'])
 def del_user():
+    t = time.time()
     user = db.user
     log = db.user_log
     data = request.data
@@ -150,7 +174,7 @@ def del_user():
         if AD:
             I = user.find_one({"user_name" : info["user_name"]})
             I["activate"] = 0
-            user.update({"user_name" : info["user_name"]},I)
+            user.update({"user_name" : info["user_name"],"update_time" : t},I)
             log.insert({'user_id' : I['_id'],'admin_id' : AD['_id'],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_del_user_%s"%(info["admin_name"],info["user_name"])})
             logger.info("user_del_%s"%(info["user_name"]))
             return jsonify(1),200
@@ -172,17 +196,20 @@ def user_modify():
         if I:
             AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
             #I = user.find_one({"user_name" : info["user_name"],"activate" : 1})
-            for i in info["changed_items"].keys():
-                if not info["changed_items"][i]:
-                    logger.error("user_change is null")
-                    return 'user_change is null',400
-                I[i] = info["changed_items"][i]
-                change_list.append(i)
-            changes = '_'.join(change_list) 
-            user.update({"_id" : I["_id"],"activate" : 1},I)
-            log.insert({'admin_id' : AD['_id'],'user_name' : info['user_name'],'user_id' : I['_id'],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_change_user:%s_%s"%(info["admin_name"],info["user_name"],changes)})
-            logger.info("user_modify_%s"%(info["user_name"]))
-            return jsonify(1),200
+            if I["update_time"] == info["update_time"]:
+                for i in info["changed_items"].keys():
+                    if not info["changed_items"][i]:
+                        logger.error("user_change is null")
+                        return 'user_change is null',400
+                    I[i] = info["changed_items"][i]
+                    change_list.append(i)
+                changes = '_'.join(change_list) 
+                user.update({"_id" : I["_id"],"activate" : 1},I)
+                log.insert({'admin_id' : AD['_id'],'user_name' : info['user_name'],'user_id' : I['_id'],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_change_user:%s_%s"%(info["admin_name"],info["user_name"],changes)})
+                logger.info("user_modify_%s"%(info["user_name"]))
+                return jsonify(1),200
+            else:
+                return update()
         else:
             logger.error("user:%s didn't exist"%(info["admin_name"]))
             return jsonify("user didn't exist"), 422
@@ -199,11 +226,14 @@ def user_password_change():
         AD = user.find_one({"name" : info["admin_name"],"activate" : 1})
         if AD:
             I = user.find_one({"name" : info["user_name"],"activate" : 1})
-            I["pw"] = info["user_pw"]
-            user.update({"name" : info["user_name"],"activate" : 1},I)
-            log.insert({'user_id' : AD['_id'],'user_name' : info["admin_name"], 'time': info['time'],'action':"%s_password_change{%s}"%(info["admin_name"],info["user_name"])})
-            logger.info("password_change{%s}"%(info["user_name"]))
-            return jsonify(1),200
+            if I["update_time"] == info["update_time"]:
+                I["pw"] = info["user_pw"]
+                user.update({"name" : info["user_name"],"activate" : 1},I)
+                log.insert({'user_id' : AD['_id'],'user_name' : info["admin_name"], 'time': info['time'],'action':"%s_password_change{%s}"%(info["admin_name"],info["user_name"])})
+                logger.info("password_change{%s}"%(info["user_name"]))
+                return jsonify(1),200
+            else:
+                return update()
     except BaseException as e:
         return str(e),400
 @app.route('/user/login/operator',methods=['POST'])
@@ -238,8 +268,13 @@ def login_admin():
         if  I:
             log.insert({'user_id' : I['_id'], 'user_name' : info["user_name"], 'time': info['time'],'action':"login_%s"%(info["user_name"])})
             #return str(int(I["type"])),200
-            logger.info("login_%s"%(info["user_name"]))
             result["type"] = I["type"]
+            try :
+                result["previous_url"] = I["previous_url"]
+            except BaseException:
+                result["previous_url"] = ''  
+            I["previous_url"] = info["admin_url"] 
+            user.update({"user_name" : info["user_name"],"activate" : 1},I)         
             P = permission.find(projection={"_id":0})
             result["permission_mng"] = list(P)
             E = el_config.find(projection={"_id":0})
@@ -253,7 +288,8 @@ def login_admin():
         else:
             logger.error("user:%s didn't exist"%(info["user_name"]))
             return jsonify("user didn't exist"), 421
-    except BaseException:
+    except BaseException as e:
+        logger.error(str(e))
         return jsonify("error"), 400
 @app.route('/user/logout',methods=['POST'])
 def logout():
@@ -281,14 +317,17 @@ def el_config_change():
         EL = el_config.find_one({"el_no" : info["el_no"]})
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if EL:
-            for i in info["changed_items"].keys():
-                EL[i] = info["changed_items"][i]
-                change_list.append(i)
-            changes = '_'.join(change_list) 
-            el_config.update({"el_no" : info["el_no"]},EL)
-            log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'el_id' : EL['_id'],'el_no' : info["el_no"], 'time': info['time'],'action':"%s_change_el_config:%s_%s"%(info["admin_name"],info["el_no"],changes)})
-            logger.info('el_config_modify')
-            return jsonify(1),200
+            if EL["update_time"] == info["update_time"]:
+               for i in info["changed_items"].keys():
+                   EL[i] = info["changed_items"][i]
+                   change_list.append(i)
+               changes = '_'.join(change_list) 
+               el_config.update({"el_no" : info["el_no"]},EL)
+               log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'el_id' : EL['_id'],'el_no' : info["el_no"], 'time': info['time'],'action':"%s_change_el_config:%s_%s"%(info["admin_name"],info["el_no"],changes)})
+               logger.info('el_config_modify')
+               return jsonify(1),200
+            else:
+                return update()
         else:
             logger.error("el_no:%s didn't exist"%(info["admin_name"]))
             return jsonify("el_no didn't exist"), 422
@@ -307,14 +346,17 @@ def gui_config_modify():
         GUI = gui_setting.find_one({"gui_no" : info["gui_no"]})
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if GUI:
-            for i in info["changed_items"].keys():
-                GUI[i] = info["changed_items"][i]
-                change_list.append(i)
-            changes = '_'.join(change_list) 
-            gui_setting.update({"gui_no" : info["gui_no"]},GUI)
-            log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'gui_id' : GUI['_id'],'gui_no' : info["gui_no"], 'time': info['time'],'action':"%s_change_gui_config:%s_%s"%(info["admin_name"],info["gui_no"],changes)})
-            logger.info('gui_config_modify')
-            return jsonify(1),200
+            if GUI["update_time"] == info["update_time"]:
+                for i in info["changed_items"].keys():
+                    GUI[i] = info["changed_items"][i]
+                    change_list.append(i)
+                changes = '_'.join(change_list) 
+                gui_setting.update({"gui_no" : info["gui_no"]},GUI)
+                log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'gui_id' : GUI['_id'],'gui_no' : info["gui_no"], 'time': info['time'],'action':"%s_change_gui_config:%s_%s"%(info["admin_name"],info["gui_no"],changes)})
+                logger.info('gui_config_modify')
+                return jsonify(1),200
+            else:
+                return update()
         else:
             logger.error("gui_no:%s didn't exist"%(info["admin_name"]))
             return jsonify("gui_no didn't exist"), 422
@@ -334,13 +376,16 @@ def permission_modify():
         for i in info["changed_items"]:
             P = permission.find_one({"type" : i["type"]})
             if P:
-                for j in i.keys():
-                    P[j] = i[j]
-                    change_list.append(j)
-                changes = '_'.join(change_list) 
-                permission.update({"type" : i["type"]},P)
-                log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'type_id' : P['_id'],'type' : i["type"], 'time': info['time'],    'action':"%s_change_permission_config:%s_%s"%(info["admin_name"],i["type"],changes)})
-                logger.info('permission_modify')
+                if P["update_time"] == info["update_time"]:
+                    for j in i.keys():
+                        P[j] = i[j]
+                        change_list.append(j)
+                    changes = '_'.join(change_list) 
+                    permission.update({"type" : i["type"]},P)
+                    log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'type_id' : P['_id'],'type' : i["type"], 'time': info['time'],    'action':"%s_change_permission_config:%s_%s"%(info["admin_name"],i["type"],changes)})
+                    logger.info('permission_modify')
+                else:
+                    return update()
             else:
                  logger.error("type:%s didn't exist"%(i["type"]))
                  return jsonify("type didn't exist"), 422

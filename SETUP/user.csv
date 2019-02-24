@@ -1,4 +1,4 @@
-user_name,user_pw,type
-yesy,888888,production admin
-dfss,asdasd,super admin
-asdasd,asdassdsd,super admin
+user_name,user_pw,type,update_time
+yesy,888888,production admin,0
+dfss,asdasd,super admin,0
+asdasd,asdassdsd,super admin,0
