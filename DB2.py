@@ -115,7 +115,7 @@ def update():
     result["gui_setting"] = list(G)
     T = thresholds.find(projection={"_id":0})
     result["thresholds"] = list(T)
-    return jsonify(result), 201
+    return jsonify(result)
 @app.route('/', methods=['GET'])
 def show():
   #t = i['Defects'][0]['Defect']
@@ -144,10 +144,10 @@ def add_user():
     info = json.loads(data.decode('utf-8'))
     if not info["user_name"]:
         logger.error('user_name null')
-        return 'user_name null',400
+        return 'user_name null',412
     if not info["user_pw"]:
         logger.error('user_pw null')
-        return 'user_pw null',400
+        return 'user_pw null',412
     try:
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if AD:
@@ -160,7 +160,7 @@ def add_user():
             return jsonify("admin user didn't exist"), 400
     except BaseException as e:
         logger.error(str(e))
-        return update()
+        return update(), 413
         #return str(e),400
 @app.route('/user/delete',methods=['POST'])
 def del_user():
@@ -200,7 +200,7 @@ def user_modify():
                 for i in info["changed_items"].keys():
                     if not info["changed_items"][i]:
                         logger.error("user_change is null")
-                        return 'user_change is null',400
+                        return 'user_change is null',412
                     I[i] = info["changed_items"][i]
                     change_list.append(i)
                 changes = '_'.join(change_list) 
@@ -233,7 +233,7 @@ def user_password_change():
                 logger.info("password_change{%s}"%(info["user_name"]))
                 return jsonify(1),200
             else:
-                return update()
+                return update(), 422
     except BaseException as e:
         return str(e),400
 @app.route('/user/login/operator',methods=['POST'])
@@ -327,7 +327,7 @@ def el_config_change():
                logger.info('el_config_modify')
                return jsonify(1),200
             else:
-                return update()
+                return update(),422
         else:
             logger.error("el_no:%s didn't exist"%(info["admin_name"]))
             return jsonify("el_no didn't exist"), 422
@@ -356,7 +356,7 @@ def gui_config_modify():
                 logger.info('gui_config_modify')
                 return jsonify(1),200
             else:
-                return update()
+                return update(), 422
         else:
             logger.error("gui_no:%s didn't exist"%(info["admin_name"]))
             return jsonify("gui_no didn't exist"), 422
@@ -385,7 +385,7 @@ def permission_modify():
                     log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'type_id' : P['_id'],'type' : i["type"], 'time': info['time'],    'action':"%s_change_permission_config:%s_%s"%(info["admin_name"],i["type"],changes)})
                     logger.info('permission_modify')
                 else:
-                    return update()
+                    return update(), 422
             else:
                  logger.error("type:%s didn't exist"%(i["type"]))
                  return jsonify("type didn't exist"), 422
@@ -507,11 +507,11 @@ def panel_add():
         if not isinstance(info['barcode'],str):
             logger.error('barcode should be str')
             #raise TypeError("barcode should be str")
-            return 'barcode should be str',400
+            return 'barcode should be str',411
         if info['cell_type'] not in ['mono','poly']:
             #   raise TypeError('cell_type wrong')
             logger.error('cell_type wrong')
-            return 'cell_type wrong',400
+            return 'cell_type wrong',412
         #if info['cell_size'] not in ['half','full']:
             #raise TypeError('cell_size wrong')
             #logger.error('cell_size wrong')
@@ -519,49 +519,49 @@ def panel_add():
         if info['cell_amount'] not in [60,72,120,144]:
             #raise TypeError('cell_amount wrong')
             logger.error('cell_amount wrong')
-            return 'cell_amount wrong',400
+            return 'cell_amount wrong',412
         if not isinstance(info['el_no'],str):
             #raise TypeError('el_no should be str')
             logger.error('el_no should be str')
-            return 'el_no should be str',400
+            return 'el_no should be str',411
         if not isinstance(info['create_time'],float):
             logger.error('create_time should be float')
-            return 'create_time should be float',400
+            return 'create_time should be float',411
         if info['display_mode'] not in [0,1,2]:
             #raise TypeError('ai_result should be 0 or 1')
             logger.error('display_mode should be 0 or 1 or 2')
-            return 'ai_result should be 0 or 1 or 2',400
+            return 'ai_result should be 0 or 1 or 2',412
         if info['ai_result'] not in [0,1,2]:
             #raise TypeError('ai_result should be 0 or 1')
             logger.error('ai_result should be 0 or 1 or 2')
-            return 'ai_result should be 0 or 1 or 2',400
+            return 'ai_result should be 0 or 1 or 2',412
         if not isinstance(info['ai_defects'], dict):
             #raise TypeError('ai_defects should be list')
             logger.error('ai_defects should be dict')
-            return 'ai_defects should be dict',400
+            return 'ai_defects should be dict',411
         if info['ai_defects']:
             for k in info['ai_defects'].keys():
                 if k not in ['cr','cs','bc','mr']:
                     #raise TypeError('ai_defects wrong')
                     logger.error('ai_defects wrong')
-                    return 'ai_defects wrong',400
+                    return 'ai_defects wrong',412
         #if not isinstance(info['ai_time'],float):
             #logger.error('ai_time should be float')
             #return 'ai_time should be float',400
         if info['gui_result'] not in [0,1,2]:
             #raise TypeError('gui_result should be 0 or 1')
             logger.error('gui_result should be 0 or 1')
-            return 'gui_result should be 0 or 1',400
+            return 'gui_result should be 0 or 1',412
         if not isinstance(info['gui_defects'], dict):
             #raise TypeError('gui_defects should be list')
             logger.error('gui_defects should be dict')
-            return 'gui_defects should be dict',400
+            return 'gui_defects should be dict',411
         if info['gui_defects']:
             for k in info['gui_defects'].keys():
                 if k not in ['cr','cs','bc','mr']:
                     #raise TypeError('gui_defects wrong')
                     logger.error('gui_defects wrong')
-                    return 'gui_defects wrong',400     
+                    return 'gui_defects wrong',411   
         #if not isinstance(info['gui_time'],float):
             #logger.error('gui_time should be float')
             #return 'gui_time should be float',400
