@@ -12,18 +12,20 @@ import logging
 import sys
 import logging.handlers
 import time
-#logging.basicConfig(filename="./log",level = logging.INFO,format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
 
-formatter = logging.Formatter('%(asctime)s %(levelname)-8s: %(message)s')
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s:%(lineno)d - %(levelname)s - %(message)s')
  
 # 文件日志
 #file_handler = logging.FileHandler("test.log")
 file_handler = logging.handlers.TimedRotatingFileHandler("log/log", when='D', interval=1, backupCount=30)
 file_handler.setFormatter(formatter)  # 可以通过setFormatter指定输出格式.
+file_handler.setLevel(logging.INFO)
 file_handler.suffix = "%Y-%m-%d_%H-%M.log"
 # 控制台日志
-console_handler = logging.StreamHandler(sys.stdout)
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)
 console_handler.formatter = formatter  # 也可以直接给formatter赋值
  
 # 为logger添加的日志处理器
@@ -32,30 +34,9 @@ logger.addHandler(console_handler)
  
 # 指定日志的最低输出级别，默认为WARN级别
 logger.setLevel(logging.INFO)
- 
-# 输出不同级别的log
-
-#logger.info('this is information')
-#logger.warn('this is warning message')
-#logger.error('this is error message')
-#logger.fatal('this is fatal message, it is same as logger.critical')
-#logger.critical('this is critical message')
- 
-# 2016-10-08 21:59:19,493 INFO    : this is information
-# 2016-10-08 21:59:19,493 WARNING : this is warning message
-# 2016-10-08 21:59:19,493 ERROR   : this is error message
-# 2016-10-08 21:59:19,493 CRITICAL: this is fatal message, it is same as logger.critical
-# 2016-10-08 21:59:19,493 CRITICAL: this is critical message
- 
-# 移除一些日志处理器
-#logger.removeHandler(file_handler)
 
 c = connect2()
-#connect('ttt', host='mongodb://database:27017,database2:27017', replicaSet='rs', read_preference=ReadPreference.SECONDARY_PREFERRED)
 
-#c = MongoClient('mongodb://0.0.0.0:27017')
-#mongo = c.ttt
-#conn = MongoReplicaSetClient("192.168.2.25:27017,192.168.2.25:27018", replicaset='rs')
 db = c['tttt']
 app = Flask(__name__)
 def re():
@@ -63,25 +44,13 @@ def re():
     c = connect2()
     global db
     db = c['tttt']
-#app.config.update(
-    #MONGO_URI='mongodb://127.0.0.1:27017/ttt',
-    #MONGO_USERNAME='bjhee',
-    #MONGO_PASSWORD='111111',
-    #MONGO_REPLICA_SET='rs',
-    #MONGO_READ_PREFERENCE='SECONDARY_PREFERRED',
-    #SCHEDULER_API_ENABLED = True
-#)
+
 app.config['SCHEDULER_API_ENABLED'] = True
 scheduler = APScheduler()
 scheduler.init_app(app)
 scheduler.add_job(id = '1',func = re, trigger='interval', seconds=60)
 scheduler.start()
-#app.config['MONGO_DBNAME'] = 'ttt'
-#app.config['MONGO_URI'] = 'mongodb://127.0.0.1:27017'  #如果部署在本上，其中ip地址可填127.0.0.1
-#app.config['MONGO_DBNAME'] = 'ttt'
-#mongo = PyMongo(app)
-#manager = Manager(app)
-#db.authenticate("root","123456") 
+
 if c.is_primary:
     db.user.ensure_index([("user_name",1),("activate",1)],unique=True)
     db.permission.ensure_index([("type",1)],unique=True)
@@ -89,13 +58,6 @@ if c.is_primary:
     db.panel.create_index([("barcode", 1)])
     db.el_config.ensure_index([("el_no",1)],unique=True)
     db.panel.ensure_index([("barcode",1),("create_time",1),("el_no",1)],unique=True)
-    #db.panel.ensure_index([("Barcode", 1)])
-#mongo.db.el
-    #db.panel_status.create_index([("time", 1)])
-    #db.panel_status.create_index([("panel_id", 1)]) 
-    #db.defect.create_index([("time", 1)])
-    #db.panel_defect.create_index([("panel_id", 1)])
-    #db.panel_defect.create_index([("defect_id", 1)])
 
 
 def update():
@@ -182,7 +144,7 @@ def del_user():
             logger.error("admin user:%s didn't exist"%(info["admin_name"]))
             return jsonify("admin user didn't exist"), 400
     except BaseException as e:
-        logger.error(str(e))
+        logger.error(e)
         return str(e),400
 @app.route('/user/modify',methods=['POST'])
 def user_modify():
@@ -253,7 +215,7 @@ def login_operator():
         return jsonify(I["type"]),200
     else:
         logger.error("user:%s didn't exist"%(info["user_name"]))
-        return jsonify("user didn't exist"), 400
+        return jsonify("login failed"), 421
 @app.route('/user/login/admin',methods=['POST','GET'])
 def login_admin():
     user = db.user
@@ -293,8 +255,8 @@ def login_admin():
         else:
             logger.error("user:%s didn't exist"%(info["user_name"]))
             return jsonify("user didn't exist"), 421
-    except BaseException as e:
-        logger.error(str(e))
+    except Exception as e:
+        logger.error(e)
         return jsonify("error"), 400
 @app.route('/user/logout',methods=['POST'])
 def logout():
@@ -312,6 +274,7 @@ def logout():
         return "user didn't exist", 400
 @app.route('/el/config/modify',methods=['POST'])
 def el_config_change():
+    t = time.time()
     el_config = db.el_config
     user = db.user
     log = db.user_log
@@ -342,6 +305,7 @@ def el_config_change():
         return str(e),400
 @app.route('/gui/config/modify',methods=['POST'])
 def gui_config_modify():
+    t = time.time()
     gui_setting = db.gui_setting
     user = db.user
     log = db.user_log
@@ -372,6 +336,7 @@ def gui_config_modify():
         return str(e),400
 @app.route('/permission/modify',methods=['POST'])
 def permission_modify():
+    t = time.time()
     permission = db.permission
     user = db.user
     log = db.user_log
@@ -379,28 +344,28 @@ def permission_modify():
     change_list = []
     info = json.loads(data.decode('utf-8'))
     AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
-    try:
-        for i in info["changed_items"]:
-            P = permission.find_one({"type" : i["type"]})
-            if P:
-                if P["update_time"] == info["changed_items"]["update_time"]:
-                    for j in i.keys():
-                        P[j] = i[j]
-                        change_list.append(j)
-                    changes = '_'.join(change_list) 
-                    P["update_time"] = t
-                    permission.update({"type" : i["type"]},P)
-                    log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'type_id' : P['_id'],'type' : i["type"], 'time': info['time'],    'action':"%s_change_permission_config:%s_%s"%(info["admin_name"],i["type"],changes)})
-                    logger.info('permission_modify')
-                else:
-                    return update(), 422
+    #try:
+    for i in info["changed_items"]:
+        P = permission.find_one({"type" : i["type"]})
+        if P:
+            if P["update_time"] == i["update_time"]:
+                for j in i.keys():
+                    P[j] = i[j]
+                    change_list.append(j)
+                changes = '_'.join(change_list) 
+                P["update_time"] = t
+                permission.update({"type" : i["type"]},P)
+                log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'type_id' : P['_id'],'type' : i["type"], 'time': info['time'],    'action':"%s_change_permission_config:%s_%s"%(info["admin_name"],i["type"],changes)})
+                logger.info('permission_modify')
             else:
-                 logger.error("type:%s didn't exist"%(i["type"]))
-                 return jsonify("type didn't exist"), 422
-        return jsonify(1),200
-    except BaseException as e:
-        logger.error(str(e))
-        return str(e),400
+                return update(), 422
+        else:
+             logger.error("type:%s didn't exist"%(i["type"]))
+             return jsonify("type didn't exist"), 422
+    return jsonify(1),200
+    #except Exception as e:
+    #    logger.error(e)
+    #    return str(e),400
     '''try:
         P = permission.find_one({"type" : info["type"]})
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
@@ -505,12 +470,13 @@ def panel_add():
     thresholds = db.thresholds
     PANEL = db.panel
     EL = db.el
-    PANEL_STATUS = db.panel_status 
-    DEFECT = db.defect 
-    PANEL_DEFECT = db.panel_defect 
+    #PANEL_STATUS = db.panel_status 
+    #DEFECT = db.defect 
+    #PANEL_DEFECT = db.panel_defect 
     #AI = mongo.db.ai 
     data = request.data
     info = json.loads(data.decode('utf-8'))
+    P = PANEL.find_one({"barcode" : info["barcode"],"create_time" : info["create_time"],"el_no" : info["el_no"]})
     try:
         if not isinstance(info['barcode'],str):
             logger.error('barcode should be str')
@@ -520,6 +486,10 @@ def panel_add():
             #   raise TypeError('cell_type wrong')
             logger.error('cell_type wrong')
             return 'cell_type wrong',412
+        if info['cell_shape'] not in ['full','half']:
+            #   raise TypeError('cell_type wrong')
+            logger.error('cell_shape wrong')
+            return 'cell_shape wrong',412
         #if info['cell_size'] not in ['half','full']:
             #raise TypeError('cell_size wrong')
             #logger.error('cell_size wrong')
@@ -606,7 +576,10 @@ def panel_add():
     except BaseException:
         pass
     try:
-        PANEL.insert({'barcode' : info['barcode'], 'cell_type': info['cell_type'],'cell_amount': info['cell_amount'],'cell_shape':info['cell_shape'],'display_mode': info['display_mode'],'el_no':info['el_no'],'create_time':info['create_time'],'defects':defects,'status':status,'thresholds':dic})
+        if P:
+            PANEL.update({"barcode" : info["barcode"],"create_time" : info["create_time"],"el_no" : info["el_no"]},{'barcode' : info['barcode'], 'cell_type': info['cell_type'],'cell_amount': info['cell_amount'],'cell_shape':info['cell_shape'],'display_mode': info['display_mode'],'el_no':info['el_no'],'create_time':info['create_time'],'defects':defects,'status':status,'thresholds':dic})
+        else:
+            PANEL.insert({'barcode' : info['barcode'], 'cell_type': info['cell_type'],'cell_amount': info['cell_amount'],'cell_shape':info['cell_shape'],'display_mode': info['display_mode'],'el_no':info['el_no'],'create_time':info['create_time'],'defects':defects,'status':status,'thresholds':dic})
     except BaseException as e:
         logger.error('barcode already exists')
         return str(e),400
