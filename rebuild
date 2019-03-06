@@ -6,4 +6,5 @@ sudo docker exec -i db_db_1 /bin/bash <<-EOF
       /data/db/update
       exit
 EOF
+cd ../
 sudo docker-compose up
