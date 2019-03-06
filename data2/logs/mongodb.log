@@ -1,172 +1,42 @@
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=65f546f8b2de
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten] db version v3.6.9
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten] git version: 167861a164723168adfaaa866f310cb94010428f
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.1.0j  20 Nov 2018
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten] allocator: tcmalloc
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten] modules: none
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten] build environment:
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten]     distmod: debian92
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten]     distarch: x86_64
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten]     target_arch: x86_64
-2019-02-14T07:27:55.194+0000 I CONTROL  [initandlisten] options: { config: "/data/db/mongod.yml", net: { bindIpAll: true }, replication: { replSetName: "rs" }, security: { keyFile: "/data/db/keyFile" }, storage: { dbPath: "/data/db", journal: { enabled: true } }, systemLog: { component: { accessControl: { verbosity: 0 }, command: { verbosity: 0 }, control: { verbosity: 0 }, geo: { verbosity: 0 }, index: { verbosity: 0 }, network: { verbosity: 0 }, query: { verbosity: 0 }, replication: { verbosity: 0 }, storage: { verbosity: 0 }, write: { verbosity: 0 } }, destination: "file", logAppend: true, logRotate: "rename", path: "/data/db/logs/mongodb.log", quiet: true } }
-2019-02-14T07:27:55.194+0000 I STORAGE  [initandlisten] 
-2019-02-14T07:27:55.194+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
-2019-02-14T07:27:55.194+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
-2019-02-14T07:27:55.194+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3412M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),cache_cursors=false,compatibility=(release="3.0",require_max="3.0"),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
-2019-02-14T07:27:55.627+0000 I STORAGE  [initandlisten] WiredTiger message [1550129275:627437][1:0x7f1f22645600], txn-recover: Set global recovery timestamp: 0
-2019-02-14T07:27:55.680+0000 I STORAGE  [initandlisten] createCollection: local.startup_log with no UUID.
-2019-02-14T07:27:55.699+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
-2019-02-14T07:27:55.699+0000 I STORAGE  [initandlisten] createCollection: local.me with no UUID.
-2019-02-14T07:27:55.720+0000 I STORAGE  [initandlisten] createCollection: local.replset.minvalid with no UUID.
-2019-02-14T07:27:55.739+0000 I REPL     [initandlisten] Did not find local voted for document at startup.
-2019-02-14T07:27:55.739+0000 I REPL     [initandlisten] Did not find local Rollback ID document at startup. Creating one.
-2019-02-14T07:27:55.739+0000 I STORAGE  [initandlisten] createCollection: local.system.rollback.id with no UUID.
-2019-02-14T07:27:55.757+0000 I REPL     [initandlisten] Initialized the rollback ID to 1
-2019-02-14T07:27:55.757+0000 I REPL     [initandlisten] Did not find local replica set configuration document at startup;  NoMatchingDocument: Did not find replica set configuration document in local.system.replset
-2019-02-14T07:27:55.757+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
-2019-02-14T07:27:55.757+0000 I CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
-2019-02-14T07:27:56.946+0000 I NETWORK  [conn1] received client metadata from 192.168.2.10:47266 conn1: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
-2019-02-14T07:27:56.947+0000 I NETWORK  [conn2] received client metadata from 192.168.2.10:47268 conn2: { driver: { name: "PyMongo", version: "3.7.2" }, os: { type: "Linux", name: "Linux", architecture: "x86_64", version: "4.15.0-44-generic" }, platform: "CPython 3.5.2.final.0" }
-2019-02-14T07:27:56.948+0000 I ACCESS   [conn2] SCRAM-SHA-1 authentication failed for root on admin from client 192.168.2.10:47268 ; UserNotFound: Could not find user root@admin
-2019-02-14T07:27:57.471+0000 I NETWORK  [conn1] end connection 192.168.2.10:47266 (1 connection now open)
-2019-02-14T07:27:57.471+0000 I NETWORK  [conn2] end connection 192.168.2.10:47268 (0 connections now open)
-2019-02-14T07:27:58.922+0000 I NETWORK  [conn3] end connection 172.20.0.1:51602 (0 connections now open)
-2019-02-14T07:27:58.932+0000 I NETWORK  [conn4] received client metadata from 172.20.0.1:51612 conn4: { driver: { name: "NetworkInterfaceASIO-Replication", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
-2019-02-14T07:27:58.933+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Connecting to 192.168.2.10:27017
-2019-02-14T07:27:58.950+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Successfully connected to 192.168.2.10:27017, took 17ms (1 connections now open to 192.168.2.10:27017)
-2019-02-14T07:28:00.990+0000 I NETWORK  [conn5] end connection 172.20.0.1:51656 (2 connections now open)
-2019-02-14T07:28:00.990+0000 I NETWORK  [conn6] end connection 172.20.0.1:51658 (1 connection now open)
-2019-02-14T07:28:01.004+0000 I STORAGE  [replexec-0] createCollection: local.system.replset with no UUID.
-2019-02-14T07:28:01.034+0000 I REPL     [replexec-0] New replica set config in use: { _id: "rs", version: 1, protocolVersion: 1, members: [ { _id: 0, host: "192.168.2.10:27017", arbiterOnly: false, buildIndexes: true, hidden: false, priority: 100.0, tags: {}, slaveDelay: 0, votes: 1 }, { _id: 1, host: "192.168.2.10:27018", arbiterOnly: false, buildIndexes: true, hidden: false, priority: 90.0, tags: {}, slaveDelay: 0, votes: 1 }, { _id: 3, host: "192.168.2.10:27019", arbiterOnly: true, buildIndexes: true, hidden: false, priority: 0.0, tags: {}, slaveDelay: 0, votes: 1 } ], settings: { chainingAllowed: true, heartbeatIntervalMillis: 2000, heartbeatTimeoutSecs: 10, electionTimeoutMillis: 10000, catchUpTimeoutMillis: -1, catchUpTakeoverDelayMillis: 30000, getLastErrorModes: {}, getLastErrorDefaults: { w: 1, wtimeout: 0 }, replicaSetId: ObjectId('5c65187e915a5b73231272a6') } }
-2019-02-14T07:28:01.034+0000 I REPL     [replexec-0] This node is 192.168.2.10:27018 in the config
-2019-02-14T07:28:01.034+0000 I REPL     [replexec-0] transition to STARTUP2 from STARTUP
-2019-02-14T07:28:01.034+0000 I REPL     [replexec-0] Starting replication storage threads
-2019-02-14T07:28:01.034+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Connecting to 192.168.2.10:27019
-2019-02-14T07:28:01.034+0000 I REPL     [replexec-3] Member 192.168.2.10:27017 is now in state SECONDARY
-2019-02-14T07:28:01.035+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Successfully connected to 192.168.2.10:27019, took 1ms (1 connections now open to 192.168.2.10:27019)
-2019-02-14T07:28:01.035+0000 I REPL     [replexec-2] Member 192.168.2.10:27019 is now in state STARTUP
-2019-02-14T07:28:01.035+0000 I NETWORK  [conn7] received client metadata from 172.20.0.1:51674 conn7: { driver: { name: "NetworkInterfaceASIO-Replication", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
-2019-02-14T07:28:01.037+0000 I STORAGE  [replexec-0] createCollection: local.temp_oplog_buffer with no UUID.
-2019-02-14T07:28:01.056+0000 I REPL     [replication-0] Starting initial sync (attempt 1 of 10)
-2019-02-14T07:28:01.056+0000 I STORAGE  [replication-0] Finishing collection drop for local.temp_oplog_buffer (no UUID).
-2019-02-14T07:28:01.058+0000 I STORAGE  [replication-0] createCollection: local.temp_oplog_buffer with no UUID.
-2019-02-14T07:28:01.078+0000 I REPL     [replication-0] sync source candidate: 192.168.2.10:27017
-2019-02-14T07:28:01.078+0000 I REPL     [replication-0] ******
-2019-02-14T07:28:01.078+0000 I REPL     [replication-0] creating replication oplog of size: 7280MB...
-2019-02-14T07:28:01.078+0000 I STORAGE  [replication-0] createCollection: local.oplog.rs with no UUID.
-2019-02-14T07:28:01.086+0000 I STORAGE  [replication-0] Starting WiredTigerRecordStoreThread local.oplog.rs
-2019-02-14T07:28:01.086+0000 I STORAGE  [replication-0] The size storer reports that the oplog contains 0 records totaling to 0 bytes
-2019-02-14T07:28:01.087+0000 I STORAGE  [replication-0] Scanning the oplog to determine where to place markers for truncation
-2019-02-14T07:28:01.145+0000 I REPL     [replication-0] ******
-2019-02-14T07:28:01.145+0000 I STORAGE  [replication-0] dropAllDatabasesExceptLocal 1
-2019-02-14T07:28:01.146+0000 I ASIO     [NetworkInterfaceASIO-RS-0] Connecting to 192.168.2.10:27017
-2019-02-14T07:28:01.150+0000 I ASIO     [NetworkInterfaceASIO-RS-0] Successfully connected to 192.168.2.10:27017, took 5ms (1 connections now open to 192.168.2.10:27017)
-2019-02-14T07:28:01.153+0000 I ASIO     [NetworkInterfaceASIO-RS-0] Connecting to 192.168.2.10:27017
-2019-02-14T07:28:01.157+0000 I REPL     [replication-1] CollectionCloner::start called, on ns:admin.system.version
-2019-02-14T07:28:01.157+0000 I ASIO     [NetworkInterfaceASIO-RS-0] Successfully connected to 192.168.2.10:27017, took 4ms (2 connections now open to 192.168.2.10:27017)
-2019-02-14T07:28:01.159+0000 I STORAGE  [repl writer worker 0] createCollection: admin.system.version with provided UUID: 8390899d-e523-4b14-b96e-0513b834ee99
-2019-02-14T07:28:01.182+0000 I INDEX    [repl writer worker 0] build index on: admin.system.version properties: { v: 2, key: { _id: 1 }, name: "_id_", ns: "admin.system.version" }
-2019-02-14T07:28:01.182+0000 I INDEX    [repl writer worker 0] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:01.185+0000 I COMMAND  [repl writer worker 2] setting featureCompatibilityVersion to 3.6
-2019-02-14T07:28:01.185+0000 I NETWORK  [repl writer worker 2] Skip closing connection for connection # 7
-2019-02-14T07:28:01.185+0000 I NETWORK  [repl writer worker 2] Skip closing connection for connection # 4
-2019-02-14T07:28:01.185+0000 I REPL     [repl writer worker 2] CollectionCloner ns:admin.system.version finished cloning with status: OK
-2019-02-14T07:28:01.191+0000 I REPL     [repl writer worker 2] Finished cloning data: OK. Beginning oplog replay.
-2019-02-14T07:28:01.193+0000 I REPL     [replication-0] No need to apply operations. (currently at { : Timestamp(1550129279, 1) })
-2019-02-14T07:28:01.194+0000 I COMMAND  [replication-1] Assigning UUID cda4bfba-4b91-4870-b6eb-1812ff3d4e34 to collection local.system.rollback.id
-2019-02-14T07:28:01.194+0000 I COMMAND  [replication-1] Assigning UUID 9d9b6e6b-fb71-4bbb-a55b-a384bbbca819 to collection local.temp_oplog_buffer
-2019-02-14T07:28:01.194+0000 I COMMAND  [replication-1] Assigning UUID 0592e41b-3e09-4f5a-8d18-443063334166 to collection local.system.replset
-2019-02-14T07:28:01.194+0000 I COMMAND  [replication-1] Assigning UUID 7490b66c-abe6-4d12-b9fc-4497b28e47fd to collection local.me
-2019-02-14T07:28:01.194+0000 I COMMAND  [replication-1] Assigning UUID 13ca9d35-ed60-476c-85c2-21751ce7f829 to collection local.startup_log
-2019-02-14T07:28:01.194+0000 I COMMAND  [replication-1] Assigning UUID 12480389-9692-436c-a7e3-111ef6adc936 to collection local.replset.minvalid
-2019-02-14T07:28:01.194+0000 I COMMAND  [replication-1] Assigning UUID 6ab49c33-5b6f-4f69-9c1b-f69515444800 to collection local.oplog.rs
-2019-02-14T07:28:01.195+0000 I ASIO     [NetworkInterfaceASIO-RS-0] Ending connection to host 192.168.2.10:27017 due to bad connection status; 1 connections to that host remain open
-2019-02-14T07:28:01.195+0000 I REPL     [replication-0] Finished fetching oplog during initial sync: CallbackCanceled: error in fetcher batch callback: oplog fetcher is shutting down. Last fetched optime and hash: { ts: Timestamp(0, 0), t: -1 }[0]
-2019-02-14T07:28:01.195+0000 I REPL     [replication-0] Initial sync attempt finishing up.
-2019-02-14T07:28:01.195+0000 I REPL     [replication-0] Initial Sync Attempt Statistics: { failedInitialSyncAttempts: 0, maxFailedInitialSyncAttempts: 10, initialSyncStart: new Date(1550129281056), initialSyncAttempts: [], fetchedMissingDocs: 0, appliedOps: 0, initialSyncOplogStart: Timestamp(1550129279, 1), initialSyncOplogEnd: Timestamp(1550129279, 1), databases: { databasesCloned: 1, admin: { collections: 1, clonedCollections: 1, start: new Date(1550129281154), end: new Date(1550129281191), elapsedMillis: 37, admin.system.version: { documentsToCopy: 1, documentsCopied: 1, indexes: 1, fetchedBatches: 1, start: new Date(1550129281157), end: new Date(1550129281191), elapsedMillis: 34 } } } }
-2019-02-14T07:28:01.195+0000 I STORAGE  [replication-0] Finishing collection drop for local.temp_oplog_buffer (9d9b6e6b-fb71-4bbb-a55b-a384bbbca819).
-2019-02-14T07:28:01.203+0000 I REPL     [replication-0] initial sync done; took 0s.
-2019-02-14T07:28:01.203+0000 I REPL     [replication-0] transition to RECOVERING from STARTUP2
-2019-02-14T07:28:01.203+0000 I REPL     [replication-0] Starting replication fetcher thread
-2019-02-14T07:28:01.203+0000 I REPL     [replication-0] Starting replication applier thread
-2019-02-14T07:28:01.204+0000 I REPL     [replication-0] Starting replication reporter thread
-2019-02-14T07:28:01.204+0000 I REPL     [rsBackgroundSync] could not find member to sync from
-2019-02-14T07:28:01.205+0000 I REPL     [replexec-0] Member 192.168.2.10:27019 is now in state ARBITER
-2019-02-14T07:28:01.205+0000 I REPL     [rsSync] transition to SECONDARY from RECOVERING
-2019-02-14T07:28:01.205+0000 I REPL     [rsSync] Resetting sync source to empty, which was :27017
-2019-02-14T07:28:09.827+0000 I STORAGE  [conn4] createCollection: local.replset.election with generated UUID: 03c87673-7dba-406e-8df3-863a0b1dcb60
-2019-02-14T07:28:10.219+0000 I REPL     [replexec-4] Member 192.168.2.10:27017 is now in state PRIMARY
-2019-02-14T07:28:12.207+0000 I REPL     [rsBackgroundSync] sync source candidate: 192.168.2.10:27017
-2019-02-14T07:28:12.209+0000 I REPL     [rsBackgroundSync] Changed sync source from empty to 192.168.2.10:27017
-2019-02-14T07:28:12.210+0000 I ASIO     [NetworkInterfaceASIO-RS-0] Connecting to 192.168.2.10:27017
-2019-02-14T07:28:12.213+0000 I STORAGE  [rsSync] createCollection: local.replset.oplogTruncateAfterPoint with generated UUID: 75f46bec-ed18-4c87-8af0-b9ca273cffc5
-2019-02-14T07:28:12.214+0000 I ASIO     [NetworkInterfaceASIO-RS-0] Successfully connected to 192.168.2.10:27017, took 4ms (2 connections now open to 192.168.2.10:27017)
-2019-02-14T07:28:12.242+0000 I STORAGE  [repl writer worker 3] createCollection: config.transactions with provided UUID: 18a6eef9-dd4b-40b8-a98b-b8212c67f990
-2019-02-14T07:28:12.278+0000 I STORAGE  [repl writer worker 5] createCollection: admin.system.keys with provided UUID: 7791e713-3c19-4ed3-b971-41c50eb8d9df
-2019-02-14T07:28:18.984+0000 I STORAGE  [repl writer worker 13] createCollection: admin.system.users with provided UUID: 59a2a15c-965d-41d7-89c3-191aa8005c0e
-2019-02-14T07:28:19.013+0000 I INDEX    [repl writer worker 1] build index on: admin.system.users properties: { v: 2, unique: true, key: { user: 1, db: 1 }, name: "user_1_db_1", ns: "admin.system.users" }
-2019-02-14T07:28:19.013+0000 I INDEX    [repl writer worker 1] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:19.013+0000 I INDEX    [repl writer worker 1] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.034+0000 I STORAGE  [repl writer worker 3] createCollection: tttt.user with provided UUID: abcab34d-bea3-47b0-b978-b7151cdb4601
-2019-02-14T07:28:31.090+0000 I INDEX    [repl writer worker 5] build index on: tttt.user properties: { v: 2, unique: true, key: { user_name: 1, activate: 1 }, name: "user_name_1_activate_1", ns: "tttt.user" }
-2019-02-14T07:28:31.091+0000 I INDEX    [repl writer worker 5] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.092+0000 I INDEX    [repl writer worker 5] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.093+0000 I STORAGE  [repl writer worker 7] createCollection: tttt.permission with provided UUID: ac2ad053-41ba-4b7c-bf79-aad6507cb7d5
-2019-02-14T07:28:31.144+0000 I INDEX    [repl writer worker 9] build index on: tttt.permission properties: { v: 2, unique: true, key: { type: 1 }, name: "type_1", ns: "tttt.permission" }
-2019-02-14T07:28:31.144+0000 I INDEX    [repl writer worker 9] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.145+0000 I INDEX    [repl writer worker 9] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.146+0000 I STORAGE  [repl writer worker 11] createCollection: tttt.gui_setting with provided UUID: e01fd454-fd30-47e6-a9b7-8e6d8b7fbd79
-2019-02-14T07:28:31.192+0000 I INDEX    [repl writer worker 13] build index on: tttt.gui_setting properties: { v: 2, unique: true, key: { gui_no: 1 }, name: "gui_no_1", ns: "tttt.gui_setting" }
-2019-02-14T07:28:31.192+0000 I INDEX    [repl writer worker 13] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.193+0000 I INDEX    [repl writer worker 13] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.193+0000 I STORAGE  [repl writer worker 1] createCollection: tttt.panel with provided UUID: 63c5ad90-d8a6-49de-8e44-c92ff9bd1ed3
-2019-02-14T07:28:31.243+0000 I INDEX    [repl writer worker 15] build index on: tttt.panel properties: { v: 2, key: { Barcode: 1 }, name: "Barcode_1", ns: "tttt.panel" }
-2019-02-14T07:28:31.243+0000 I INDEX    [repl writer worker 15] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.244+0000 I INDEX    [repl writer worker 15] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.245+0000 I STORAGE  [repl writer worker 3] createCollection: tttt.el_config with provided UUID: 8d9278c6-6291-4aa2-b3f0-cc7f3d6e1644
-2019-02-14T07:28:31.294+0000 I INDEX    [repl writer worker 5] build index on: tttt.el_config properties: { v: 2, unique: true, key: { el_no: 1 }, name: "el_no_1", ns: "tttt.el_config" }
-2019-02-14T07:28:31.294+0000 I INDEX    [repl writer worker 5] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.295+0000 I INDEX    [repl writer worker 5] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.312+0000 I INDEX    [repl writer worker 7] build index on: tttt.panel properties: { v: 2, unique: true, key: { Barcode: 1, create_time: 1 }, name: "Barcode_1_create_time_1", ns: "tttt.panel" }
-2019-02-14T07:28:31.312+0000 I INDEX    [repl writer worker 7] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.313+0000 I INDEX    [repl writer worker 7] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.314+0000 I STORAGE  [repl writer worker 9] createCollection: tttt.panel_status with provided UUID: 0d534521-cedd-45b0-b9da-3c8fca8a7a50
-2019-02-14T07:28:31.359+0000 I INDEX    [repl writer worker 11] build index on: tttt.panel_status properties: { v: 2, key: { time: 1 }, name: "time_1", ns: "tttt.panel_status" }
-2019-02-14T07:28:31.359+0000 I INDEX    [repl writer worker 11] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.360+0000 I INDEX    [repl writer worker 11] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.372+0000 I INDEX    [repl writer worker 13] build index on: tttt.panel_status properties: { v: 2, key: { Panel_ID: 1 }, name: "Panel_ID_1", ns: "tttt.panel_status" }
-2019-02-14T07:28:31.372+0000 I INDEX    [repl writer worker 13] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.372+0000 I INDEX    [repl writer worker 13] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.373+0000 I STORAGE  [repl writer worker 1] createCollection: tttt.defect with provided UUID: 53059b91-43b3-4c27-b802-8f1452b3b66e
-2019-02-14T07:28:31.426+0000 I INDEX    [repl writer worker 15] build index on: tttt.defect properties: { v: 2, key: { time: 1 }, name: "time_1", ns: "tttt.defect" }
-2019-02-14T07:28:31.426+0000 I INDEX    [repl writer worker 15] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.427+0000 I INDEX    [repl writer worker 15] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.427+0000 I STORAGE  [repl writer worker 3] createCollection: tttt.panel_defect with provided UUID: 7099bbdc-2e22-48ec-8bbd-56131942f789
-2019-02-14T07:28:31.463+0000 I INDEX    [repl writer worker 5] build index on: tttt.panel_defect properties: { v: 2, key: { Panel_ID: 1 }, name: "Panel_ID_1", ns: "tttt.panel_defect" }
-2019-02-14T07:28:31.463+0000 I INDEX    [repl writer worker 5] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.464+0000 I INDEX    [repl writer worker 5] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:31.475+0000 I INDEX    [repl writer worker 7] build index on: tttt.panel_defect properties: { v: 2, key: { Defect_ID: 1 }, name: "Defect_ID_1", ns: "tttt.panel_defect" }
-2019-02-14T07:28:31.475+0000 I INDEX    [repl writer worker 7] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:28:31.476+0000 I INDEX    [repl writer worker 7] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:28:35.951+0000 I STORAGE  [repl writer worker 11] createCollection: tttt.el with provided UUID: 15976b24-b89c-4c7f-ae03-c2d5d6c59ee6
-2019-02-14T07:30:30.812+0000 I STORAGE  [repl writer worker 12] createCollection: tttt.thresholds with provided UUID: 51f30ddc-6b17-4e33-b651-12557783ee8a
-2019-02-14T07:32:55.757+0000 I CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
-2019-02-14T07:32:55.757+0000 I NETWORK  [LogicalSessionCacheRefresh] Starting new replica set monitor for rs/192.168.2.10:27017,192.168.2.10:27018
-2019-02-14T07:32:55.759+0000 I NETWORK  [conn8] received client metadata from 172.20.0.1:53148 conn8: { driver: { name: "MongoDB Internal Client", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
-2019-02-14T07:32:55.759+0000 I NETWORK  [ReplicaSetMonitor-TaskExecutor-0] Successfully connected to 192.168.2.10:27017 (1 connections now open to 192.168.2.10:27017 with a 5 second timeout)
-2019-02-14T07:32:55.759+0000 I NETWORK  [LogicalSessionCacheRefresh] Successfully connected to 192.168.2.10:27018 (1 connections now open to 192.168.2.10:27018 with a 5 second timeout)
-2019-02-14T07:32:55.761+0000 I NETWORK  [LogicalSessionCacheRefresh] Successfully connected to 192.168.2.10:27017 (1 connections now open to 192.168.2.10:27017 with a 0 second timeout)
-2019-02-14T07:32:55.763+0000 I CONTROL  [LogicalSessionCacheRefresh] Sessions collection is not set up; waiting until next sessions refresh interval: config.system.sessions does not exist
-2019-02-14T07:32:56.772+0000 I STORAGE  [repl writer worker 13] createCollection: config.system.sessions with provided UUID: f1d5bda7-931c-4d0b-ac77-8aaa215c2640
-2019-02-14T07:32:56.807+0000 I INDEX    [repl writer worker 3] build index on: config.system.sessions properties: { v: 2, key: { lastUse: 1 }, name: "lsidTTLIndex", expireAfterSeconds: 1800, ns: "config.system.sessions" }
-2019-02-14T07:32:56.807+0000 I INDEX    [repl writer worker 3] 	 building index using bulk method; build may temporarily use up to 500 megabytes of RAM
-2019-02-14T07:32:56.807+0000 I INDEX    [repl writer worker 3] build index done.  scanned 0 total records. 0 secs
-2019-02-14T07:37:55.757+0000 I NETWORK  [LogicalSessionCacheRefresh] Starting new replica set monitor for rs/192.168.2.10:27017,192.168.2.10:27018
-2019-02-14T07:37:55.760+0000 I NETWORK  [LogicalSessionCacheRefresh] Successfully connected to 192.168.2.10:27017 (2 connections now open to 192.168.2.10:27017 with a 0 second timeout)
-2019-02-14T07:37:55.762+0000 I NETWORK  [LogicalSessionCacheRefresh] Starting new replica set monitor for rs/192.168.2.10:27017,192.168.2.10:27018
-2019-02-14T07:37:55.766+0000 I NETWORK  [LogicalSessionCacheRefresh] Starting new replica set monitor for rs/192.168.2.10:27017,192.168.2.10:27018
-2019-02-14T07:37:55.769+0000 I NETWORK  [LogicalSessionCacheRefresh] Starting new replica set monitor for rs/192.168.2.10:27017,192.168.2.10:27018
-2019-02-14T07:42:55.757+0000 I NETWORK  [LogicalSessionCacheRefresh] Starting new replica set monitor for rs/192.168.2.10:27017,192.168.2.10:27018
-2019-02-14T07:42:55.758+0000 I NETWORK  [LogicalSessionCacheRefresh] Starting new replica set monitor for rs/192.168.2.10:27017,192.168.2.10:27018
-2019-02-14T07:42:55.759+0000 I NETWORK  [LogicalSessionCacheRefresh] Starting new replica set monitor for rs/192.168.2.10:27017,192.168.2.10:27018
-2019-02-14T07:42:55.760+0000 I NETWORK  [LogicalSessionCacheRefresh] Starting new replica set monitor for rs/192.168.2.10:27017,192.168.2.10:27018
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=c155894d90ba
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten] db version v3.6.9
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten] git version: 167861a164723168adfaaa866f310cb94010428f
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.1.0j  20 Nov 2018
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten] modules: none
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten] build environment:
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten]     distmod: debian92
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten]     distarch: x86_64
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+2019-03-01T08:30:35.943+0000 I CONTROL  [initandlisten] options: { config: "/data/db/mongod.yml", net: { bindIpAll: true }, replication: { replSetName: "rs" }, security: { keyFile: "/data/db/keyFile" }, storage: { dbPath: "/data/db", journal: { enabled: true } }, systemLog: { component: { accessControl: { verbosity: 0 }, command: { verbosity: 0 }, control: { verbosity: 0 }, geo: { verbosity: 0 }, index: { verbosity: 0 }, network: { verbosity: 0 }, query: { verbosity: 0 }, replication: { verbosity: 0 }, storage: { verbosity: 0 }, write: { verbosity: 0 } }, destination: "file", logAppend: true, logRotate: "rename", path: "/data/db/logs/mongodb.log", quiet: true } }
+2019-03-01T08:30:35.943+0000 I STORAGE  [initandlisten] 
+2019-03-01T08:30:35.943+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2019-03-01T08:30:35.943+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2019-03-01T08:30:35.943+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3412M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),cache_cursors=false,compatibility=(release="3.0",require_max="3.0"),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+2019-03-01T08:30:36.379+0000 I STORAGE  [initandlisten] WiredTiger message [1551429036:379637][1:0x7f520f8f7600], txn-recover: Set global recovery timestamp: 0
+2019-03-01T08:30:36.438+0000 I STORAGE  [initandlisten] createCollection: local.startup_log with no UUID.
+2019-03-01T08:30:36.462+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+2019-03-01T08:30:36.462+0000 I STORAGE  [initandlisten] createCollection: local.me with no UUID.
+2019-03-01T08:30:36.485+0000 I STORAGE  [initandlisten] createCollection: local.replset.minvalid with no UUID.
+2019-03-01T08:30:36.509+0000 I REPL     [initandlisten] Did not find local voted for document at startup.
+2019-03-01T08:30:36.509+0000 I REPL     [initandlisten] Did not find local Rollback ID document at startup. Creating one.
+2019-03-01T08:30:36.509+0000 I STORAGE  [initandlisten] createCollection: local.system.rollback.id with no UUID.
+2019-03-01T08:30:36.532+0000 I REPL     [initandlisten] Initialized the rollback ID to 1
+2019-03-01T08:30:36.532+0000 I REPL     [initandlisten] Did not find local replica set configuration document at startup;  NoMatchingDocument: Did not find replica set configuration document in local.system.replset
+2019-03-01T08:30:36.533+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+2019-03-01T08:30:36.533+0000 I CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
+2019-03-01T08:30:38.014+0000 I CONTROL  [signalProcessingThread] got signal 15 (Terminated), will terminate after current cmd ends
+2019-03-01T08:30:38.014+0000 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+2019-03-01T08:30:38.014+0000 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-27017.sock
+2019-03-01T08:30:38.014+0000 I REPL     [signalProcessingThread] shutdown: removing all drop-pending collections...
+2019-03-01T08:30:38.014+0000 I REPL     [signalProcessingThread] shutdown: removing checkpointTimestamp collection...
+2019-03-01T08:30:38.014+0000 I REPL     [signalProcessingThread] shutting down replication subsystems
+2019-03-01T08:30:38.015+0000 I FTDC     [signalProcessingThread] Shutting down full-time diagnostic data capture
+2019-03-01T08:30:38.019+0000 I STORAGE  [signalProcessingThread] WiredTigerKVEngine shutting down
+2019-03-01T08:30:38.521+0000 I STORAGE  [signalProcessingThread] WiredTiger message [1551429038:521605][1:0x7f520dedd700], txn-recover: Main recovery loop: starting at 1/20864
+2019-03-01T08:30:38.710+0000 I STORAGE  [signalProcessingThread] WiredTiger message [1551429038:710284][1:0x7f520dedd700], txn-recover: Recovering log 1 through 2
+2019-03-01T08:30:38.808+0000 I STORAGE  [signalProcessingThread] WiredTiger message [1551429038:808079][1:0x7f520dedd700], txn-recover: Recovering log 2 through 2
+2019-03-01T08:30:38.899+0000 I STORAGE  [signalProcessingThread] WiredTiger message [1551429038:899815][1:0x7f520dedd700], txn-recover: Set global recovery timestamp: 0
+2019-03-01T08:30:39.073+0000 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+2019-03-01T08:30:39.074+0000 I CONTROL  [signalProcessingThread] now exiting
+2019-03-01T08:30:39.074+0000 I CONTROL  [signalProcessingThread] shutting down with code:0

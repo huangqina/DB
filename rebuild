@@ -1,6 +1,7 @@
 #!/bin/bash
 cd data
 sudo cp -rf ../update ./
+sudo chmod 777 ./update
 sudo docker exec -i db_db_1 /bin/bash <<-EOF
       /data/db/update
       exit

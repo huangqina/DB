@@ -12,6 +12,7 @@ def connect2():
             ip = list(line.strip().split(':'))
             count = 0
             client = MongoClient("mongodb://root:123456@%s:%i"%(ip[0],int(ip[1])), serverSelectionTimeoutMS=5)
+            slave = client
             while True:
                 try:
                     client.admin.command("ping")
@@ -26,6 +27,7 @@ def connect2():
                         break
                 if count == 5:
                     line = fd.readline()
+                    slave = client
                     break
     except BaseException:
         pass

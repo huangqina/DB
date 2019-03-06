@@ -12,18 +12,24 @@ import logging
 import sys
 import logging.handlers
 import time
-#logging.basicConfig(filename="./log",level = logging.INFO,format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+import csv
+import os
+import sys
 
-formatter = logging.Formatter('%(asctime)s %(levelname)-8s: %(message)s')
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+formatter = logging.Formatter('%(asctime)s - %(name)s:%(lineno)d - %(levelname)s - %(message)s')
  
 # 文件日志
 #file_handler = logging.FileHandler("test.log")
 file_handler = logging.handlers.TimedRotatingFileHandler("log/log", when='D', interval=1, backupCount=30)
 file_handler.setFormatter(formatter)  # 可以通过setFormatter指定输出格式.
+file_handler.setLevel(logging.INFO)
 file_handler.suffix = "%Y-%m-%d_%H-%M.log"
 # 控制台日志
-console_handler = logging.StreamHandler(sys.stdout)
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG)
 console_handler.formatter = formatter  # 也可以直接给formatter赋值
  
 # 为logger添加的日志处理器
@@ -32,30 +38,9 @@ logger.addHandler(console_handler)
  
 # 指定日志的最低输出级别，默认为WARN级别
 logger.setLevel(logging.INFO)
- 
-# 输出不同级别的log
-
-#logger.info('this is information')
-#logger.warn('this is warning message')
-#logger.error('this is error message')
-#logger.fatal('this is fatal message, it is same as logger.critical')
-#logger.critical('this is critical message')
- 
-# 2016-10-08 21:59:19,493 INFO    : this is information
-# 2016-10-08 21:59:19,493 WARNING : this is warning message
-# 2016-10-08 21:59:19,493 ERROR   : this is error message
-# 2016-10-08 21:59:19,493 CRITICAL: this is fatal message, it is same as logger.critical
-# 2016-10-08 21:59:19,493 CRITICAL: this is critical message
- 
-# 移除一些日志处理器
-#logger.removeHandler(file_handler)
 
 c = connect2()
-#connect('ttt', host='mongodb://database:27017,database2:27017', replicaSet='rs', read_preference=ReadPreference.SECONDARY_PREFERRED)
 
-#c = MongoClient('mongodb://0.0.0.0:27017')
-#mongo = c.ttt
-#conn = MongoReplicaSetClient("192.168.2.25:27017,192.168.2.25:27018", replicaset='rs')
 db = c['tttt']
 app = Flask(__name__)
 def re():
@@ -63,39 +48,20 @@ def re():
     c = connect2()
     global db
     db = c['tttt']
-#app.config.update(
-    #MONGO_URI='mongodb://127.0.0.1:27017/ttt',
-    #MONGO_USERNAME='bjhee',
-    #MONGO_PASSWORD='111111',
-    #MONGO_REPLICA_SET='rs',
-    #MONGO_READ_PREFERENCE='SECONDARY_PREFERRED',
-    #SCHEDULER_API_ENABLED = True
-#)
+
 app.config['SCHEDULER_API_ENABLED'] = True
 scheduler = APScheduler()
 scheduler.init_app(app)
-scheduler.add_job(id = '1',func = re, trigger='interval', seconds=60)
+scheduler.add_job(id = '1',func = re, trigger='interval', seconds=30)
 scheduler.start()
-#app.config['MONGO_DBNAME'] = 'ttt'
-#app.config['MONGO_URI'] = 'mongodb://127.0.0.1:27017'  #如果部署在本上，其中ip地址可填127.0.0.1
-#app.config['MONGO_DBNAME'] = 'ttt'
-#mongo = PyMongo(app)
-#manager = Manager(app)
-#db.authenticate("root","123456") 
+
 if c.is_primary:
-    db.user.ensure_index([("user_name",1),("activate",1)],unique=True)
+    #db.user.ensure_index([("user_name",1),("activate",1)],unique=True)
     db.permission.ensure_index([("type",1)],unique=True)
     db.gui_setting.ensure_index([("gui_no",1)],unique=True)
     db.panel.create_index([("barcode", 1)])
     db.el_config.ensure_index([("el_no",1)],unique=True)
     db.panel.ensure_index([("barcode",1),("create_time",1),("el_no",1)],unique=True)
-    #db.panel.ensure_index([("Barcode", 1)])
-#mongo.db.el
-    #db.panel_status.create_index([("time", 1)])
-    #db.panel_status.create_index([("panel_id", 1)]) 
-    #db.defect.create_index([("time", 1)])
-    #db.panel_defect.create_index([("panel_id", 1)])
-    #db.panel_defect.create_index([("defect_id", 1)])
 
 
 def update():
@@ -116,17 +82,34 @@ def update():
     T = thresholds.find(projection={"_id":0})
     result["thresholds"] = list(T)
     return jsonify(result)
+
+url = {}
+
+PROJ_PATH = os.path.split(os.path.split(os.path.split(sys.argv[0])[0])[0])[0]
+PROJ_PATH = 
+with open('./SETUP/url.csv','r',newline='') as f:
+    reader = csv.DictReader(f)
+    for i in reader:
+        url = i
+
 @app.route('/', methods=['GET'])
 def show():
   #t = i['Defects'][0]['Defect']
   return '<p>Hello!</p>'
   #return  '<p>ip:5000/user/add {"admin_name": str, "user_name": str, "user_pw": str, "time": float}</p><p>ip:5000/user/del {"admin_name": str, "user_name": str, "admin_pw": str, "time": float}</p><p>ip:5000/user/login {"type": int, "user_name": str, "user_pw": str, "time": float}</p><p>ip:5000/user/logout {"user_name": str, "time": float}</p><p>ip:5000/panel/add {"barcode": str, "cell_type": str, "cell_amount": int, "el_no": str, "display_mode": int, "module_no": int, "thresholds": dict, "create_time": float, "ai_result": int, "ai_defects": dict, "gui_result": int, "gui_defects": dict}</p><p>ip:5000/barcode/find {"barcode": str}    #post barcode</p><p>ip:5000/NG/find   [float, float]  #post time</p><p>ip:5000/OK/find  [float, float]     #post time</p><p>ip:5000/missrate/find   [float, float] #post time</p><p>ip:5000/overkillrate/find   [float, float]  #post time</p><p>ip:5000/defect/find   [float, float]  #post time</p>'
+
+
+
 @app.route('/user/show',methods=['POST','GET'])
 def user_show():
     user = db.user
     a = user.find({"activate":1},projection={"_id":0,"activate":0,"user_pw":0})
     b = list(a)
     return jsonify(b)
+
+
+
+
 @app.route('/user/display',methods=['POST','GET'])
 def user_display():
     user = db.user
@@ -135,6 +118,9 @@ def user_display():
     res = {}
     res["users"] = b
     return jsonify(res)
+
+
+
 @app.route('/user/add',methods=['POST'])
 def add_user():
     t = time.time()
@@ -151,10 +137,14 @@ def add_user():
     try:
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if AD:
-            user.insert({"user_name" : info["user_name"],"user_pw" : info["user_pw"],"activate" : 1,"type":info["type"],"update_time" : t})
-            log.insert({'admin_id' : AD["_id"],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_add_user_%s"%(info["admin_name"],info["user_name"])})
-            logger.info("user_add{%s}"%(info["user_name"]))
-            return jsonify(1),200
+            U = user.find_one({"user_name" : info["user_name"],"activate" : 1})
+            if not U:
+                user.insert({"user_name" : info["user_name"],"user_pw" : info["user_pw"],"activate" : 1,"type":info["type"],"update_time" : t})
+                log.insert({'admin_id' : AD["_id"],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_add_user_%s"%(info["admin_name"],info["user_name"])})
+                logger.info("user_add{%s}"%(info["user_name"]))
+                return update(),200
+            else:
+                return jsonify('user exists'),413          
         else:
             logger.error("admin user:%s didn't exist"%(info["admin_name"]))
             return jsonify("admin user didn't exist"), 400
@@ -162,6 +152,9 @@ def add_user():
         logger.error(str(e))
         return update(), 413
         #return str(e),400
+
+
+
 @app.route('/user/delete',methods=['POST'])
 def del_user():
     t = time.time()
@@ -172,18 +165,23 @@ def del_user():
     try:
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if AD:
-            I = user.find_one({"user_name" : info["user_name"]})
+            I = user.find_one({"user_name" : info["user_name"],"activate" : 1})
             I["activate"] = 0
-            user.update({"user_name" : info["user_name"],"update_time" : t},I)
+            I["update_time"] = t
+            user.update({"user_name" : info["user_name"],"activate" : 1},I)
             log.insert({'user_id' : I['_id'],'admin_id' : AD['_id'],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_del_user_%s"%(info["admin_name"],info["user_name"])})
             logger.info("user_del_%s"%(info["user_name"]))
-            return jsonify(1),200
+            return update(),200
         else:
             logger.error("admin user:%s didn't exist"%(info["admin_name"]))
             return jsonify("admin user didn't exist"), 400
     except BaseException as e:
-        logger.error(str(e))
+        logger.error(e)
         return str(e),400
+
+
+
+
 @app.route('/user/modify',methods=['POST'])
 def user_modify():
     t = time.time()
@@ -197,6 +195,12 @@ def user_modify():
         if I:
             AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
             #I = user.find_one({"user_name" : info["user_name"],"activate" : 1})
+            try:
+                dup = user.find_one({"user_name" : info["changed_items"]["user_name"],"activate" : 1})
+                if dup:
+                    return update(),412
+            except BaseException as e:
+                pass
             if I["update_time"] == info["changed_items"]["update_time"]:
                 for i in info["changed_items"].keys():
                     if not info["changed_items"][i]:
@@ -209,15 +213,19 @@ def user_modify():
                 user.update({"_id" : I["_id"],"activate" : 1},I)
                 log.insert({'admin_id' : AD['_id'],'user_name' : info['user_name'],'user_id' : I['_id'],'admin_name' : info["admin_name"], 'time': info['time'],'action':"%s_change_user:%s_%s"%(info["admin_name"],info["user_name"],changes)})
                 logger.info("user_modify_%s"%(info["user_name"]))
-                return jsonify(1),200
+                return update(),200
             else:
                 return update(), 422
         else:
             logger.error("user:%s didn't exist"%(info["admin_name"]))
-            return jsonify("user didn't exist"), 422
+            return update(), 422
     except BaseException as e:
         logger.error(str(e))
-        return str(e),400
+        return update(),400
+
+
+
+
 @app.route('/user/password/change',methods=['POST'])
 def user_password_change():
     user = db.user
@@ -238,6 +246,10 @@ def user_password_change():
                 return update(), 422
     except BaseException as e:
         return str(e),400
+
+
+
+
 @app.route('/user/login/operator',methods=['POST'])
 def login_operator():
     user = db.user
@@ -253,7 +265,11 @@ def login_operator():
         return jsonify(I["type"]),200
     else:
         logger.error("user:%s didn't exist"%(info["user_name"]))
-        return jsonify("user didn't exist"), 400
+        return jsonify("login failed"), 421
+
+
+
+
 @app.route('/user/login/admin',methods=['POST','GET'])
 def login_admin():
     user = db.user
@@ -272,13 +288,17 @@ def login_admin():
             #return str(int(I["type"])),200
             result["type"] = I["type"]
             try :
-                result["previous_url"] = I["previous_url"]
+                pre_url = url[info["admin_url"]]
+                if  I["previous_url"] != pre_url:
+                    result["previous_url"] = I["previous_url"]
+                else:
+                    result["previous_url"] = '' 
             except BaseException:
                 result["previous_url"] = ''   
             try :
-                I["previous_url"] = info["admin_url"] 
+                I["previous_url"] = pre_url 
             except BaseException:  
-                I["previous_url"] = info["admin_url"] 
+                I["previous_url"] = ''
             user.update({"user_name" : info["user_name"],"activate" : 1},I)         
             P = permission.find(projection={"_id":0})
             result["permission_mng"] = list(P)
@@ -293,9 +313,13 @@ def login_admin():
         else:
             logger.error("user:%s didn't exist"%(info["user_name"]))
             return jsonify("user didn't exist"), 421
-    except BaseException as e:
-        logger.error(str(e))
+    except Exception as e:
+        logger.error(e)
         return jsonify("error"), 400
+
+
+
+
 @app.route('/user/logout',methods=['POST'])
 def logout():
     user = db.user
@@ -310,9 +334,15 @@ def logout():
     else:
         logger.error("user:%s didn't exist"%(info["user_name"]))
         return "user didn't exist", 400
+
+
+
+
 @app.route('/el/config/modify',methods=['POST'])
 def el_config_change():
+    t = time.time()
     el_config = db.el_config
+    gui_setting = db.gui_setting
     user = db.user
     log = db.user_log
     data = request.data
@@ -323,26 +353,43 @@ def el_config_change():
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if EL:
             if EL["update_time"] == info["changed_items"]["update_time"]:
-               for i in info["changed_items"].keys():
+                '''try:
+                    limit = list(db.el_config.aggregate([{'$match':{'gui_no':info['changed_items']["gui_no"]}},
+                        {"$group":{
+                        '_id' :{ '_id':'$gui_no'}
+                         ,
+                        'limit':{"$sum":1}}}]))
+                    gui_limit = gui_setting.find_one({"gui_no" : info['changed_items']["gui_no"]})
+                    if limit[0]['limit']+1 > gui_limit['el_limit']:
+                        return update(),412
+                except BaseException:
+                    pass'''
+                for i in info["changed_items"].keys():
                    EL[i] = info["changed_items"][i]
                    change_list.append(i)
-               changes = '_'.join(change_list) 
-               EL["update_time"] = t
-               el_config.update({"el_no" : info["el_no"]},EL)
-               log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'el_id' : EL['_id'],'el_no' : info["el_no"], 'time': info['time'],'action':"%s_change_el_config:%s_%s"%(info["admin_name"],info["el_no"],changes)})
-               logger.info('el_config_modify')
-               return jsonify(1),200
+                changes = '_'.join(change_list) 
+                EL["update_time"] = t
+                el_config.update({"el_no" : info["el_no"]},EL)
+                log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'el_id' : EL['_id'],'el_no' : info["el_no"], 'time': info['time'],'action':"%s_change_el_config:%s_%s"%(info["admin_name"],info["el_no"],changes)})
+                logger.info('el_config_modify')
+                return update(),200
             else:
                 return update(),422
         else:
             logger.error("el_no:%s didn't exist"%(info["admin_name"]))
-            return jsonify("el_no didn't exist"), 422
+            return update(), 422
     except BaseException as e:
         logger.error(str(e))
-        return str(e),400
+        return update(),400
+
+
+
+
 @app.route('/gui/config/modify',methods=['POST'])
 def gui_config_modify():
+    t = time.time()
     gui_setting = db.gui_setting
+    el_config = db.el_config
     user = db.user
     log = db.user_log
     data = request.data
@@ -353,6 +400,16 @@ def gui_config_modify():
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
         if GUI:
             if GUI["update_time"] == info["changed_items"]["update_time"]:
+                try:
+                    limit = list(db.el_config.aggregate([{'$match':{'gui_no':GUI['gui_no']}},
+                        {"$group":{
+                        '_id' :{ '_id':'$gui_no'}
+                         ,
+                        'limit':{"$sum":1}}}]))
+                    if limit[0]['limit'] > int(info["changed_items"]['el_limit']):
+                        return update(),412
+                except BaseException:
+                    pass
                 for i in info["changed_items"].keys():
                     GUI[i] = info["changed_items"][i]
                     change_list.append(i)
@@ -361,17 +418,22 @@ def gui_config_modify():
                 gui_setting.update({"gui_no" : info["gui_no"]},GUI)
                 log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'gui_id' : GUI['_id'],'gui_no' : info["gui_no"], 'time': info['time'],'action':"%s_change_gui_config:%s_%s"%(info["admin_name"],info["gui_no"],changes)})
                 logger.info('gui_config_modify')
-                return jsonify(1),200
+                return update(),200
             else:
                 return update(), 422
         else:
             logger.error("gui_no:%s didn't exist"%(info["admin_name"]))
-            return jsonify("gui_no didn't exist"), 422
+            return update(), 422
     except BaseException as e:
         logger.error(str(e))
-        return str(e),400
+        return update(),400
+
+
+
+
 @app.route('/permission/modify',methods=['POST'])
 def permission_modify():
+    t = time.time()
     permission = db.permission
     user = db.user
     log = db.user_log
@@ -379,28 +441,28 @@ def permission_modify():
     change_list = []
     info = json.loads(data.decode('utf-8'))
     AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
-    try:
-        for i in info["changed_items"]:
-            P = permission.find_one({"type" : i["type"]})
-            if P:
-                if P["update_time"] == info["changed_items"]["update_time"]:
-                    for j in i.keys():
-                        P[j] = i[j]
-                        change_list.append(j)
-                    changes = '_'.join(change_list) 
-                    P["update_time"] = t
-                    permission.update({"type" : i["type"]},P)
-                    log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'type_id' : P['_id'],'type' : i["type"], 'time': info['time'],    'action':"%s_change_permission_config:%s_%s"%(info["admin_name"],i["type"],changes)})
-                    logger.info('permission_modify')
-                else:
-                    return update(), 422
+    #try:
+    for i in info["changed_items"]:
+        P = permission.find_one({"type" : i["type"]})
+        if P:
+            if P["update_time"] == i["update_time"]:
+                for j in i.keys():
+                    P[j] = i[j]
+                    change_list.append(j)
+                changes = '_'.join(change_list) 
+                P["update_time"] = t
+                permission.update({"type" : i["type"]},P)
+                log.insert({'admin_id' : AD['_id'],'admin_name' : info["admin_name"],'type_id' : P['_id'],'type' : i["type"], 'time': info['time'],    'action':"%s_change_permission_config:%s_%s"%(info["admin_name"],i["type"],changes)})
+                logger.info('permission_modify')
             else:
-                 logger.error("type:%s didn't exist"%(i["type"]))
-                 return jsonify("type didn't exist"), 422
-        return jsonify(1),200
-    except BaseException as e:
-        logger.error(str(e))
-        return str(e),400
+                return update(), 422
+        else:
+             logger.error("type:%s didn't exist"%(i["type"]))
+             return update(), 422
+    return update(),200
+    #except Exception as e:
+    #    logger.error(e)
+    #    return str(e),400
     '''try:
         P = permission.find_one({"type" : info["type"]})
         AD = user.find_one({"user_name" : info["admin_name"],"activate" : 1})
@@ -444,6 +506,10 @@ def el_config_change():
         return jsonify(1),200
     except BaseException as e:
         return str(e),400'''
+
+
+
+
 @app.route('/el/config/display',methods=['POST','GET'])
 def el_config_display():
     el_config = db.el_config
@@ -477,6 +543,10 @@ def el_config_check():
     except BaseException as e:
         logger.error(str(e))
         return str(e),400
+
+
+
+
 @app.route('/gui/config/check',methods=['POST','GET'])
 def gui_config_check():
     gui_setting = db.gui_setting
@@ -496,6 +566,10 @@ def gui_config_check():
     except BaseException as e:
         logger.error(str(e))
         return str(e),400
+
+
+
+
 #@app.route('/el/config/check',methods=['POST'])
 #def el_config_check():
 @app.route('/panel/add',methods=['POST'])
@@ -504,13 +578,14 @@ def panel_add():
     #module_no = db.module_no
     thresholds = db.thresholds
     PANEL = db.panel
-    EL = db.el
-    PANEL_STATUS = db.panel_status 
-    DEFECT = db.defect 
-    PANEL_DEFECT = db.panel_defect 
+    #EL = db.el
+    #PANEL_STATUS = db.panel_status 
+    #DEFECT = db.defect 
+    #PANEL_DEFECT = db.panel_defect 
     #AI = mongo.db.ai 
     data = request.data
     info = json.loads(data.decode('utf-8'))
+    P = PANEL.find_one({"barcode" : info["barcode"],"create_time" : info["create_time"],"el_no" : info["el_no"]})
     try:
         if not isinstance(info['barcode'],str):
             logger.error('barcode should be str')
@@ -520,6 +595,10 @@ def panel_add():
             #   raise TypeError('cell_type wrong')
             logger.error('cell_type wrong')
             return 'cell_type wrong',412
+        if info['cell_shape'] not in ['full','half']:
+            #   raise TypeError('cell_type wrong')
+            logger.error('cell_shape wrong')
+            return 'cell_shape wrong',412
         #if info['cell_size'] not in ['half','full']:
             #raise TypeError('cell_size wrong')
             #logger.error('cell_size wrong')
@@ -539,34 +618,37 @@ def panel_add():
             #raise TypeError('ai_result should be 0 or 1')
             logger.error('display_mode should be 0 or 1 or 2')
             return 'ai_result should be 0 or 1 or 2',412
-        if info['ai_result'] not in [0,1,2]:
-            #raise TypeError('ai_result should be 0 or 1')
-            logger.error('ai_result should be 0 or 1 or 2')
-            return 'ai_result should be 0 or 1 or 2',412
+        if info['ai_result'] is not None:
+            if info['ai_result'] not in [0,1,2]:
+              #raise TypeError('ai_result should be 0 or 1')
+                logger.error('ai_result should be 0 or 1 or 2')
+                return 'ai_result should be 0 or 1 or 2',412
         if not isinstance(info['ai_defects'], dict):
             #raise TypeError('ai_defects should be list')
             logger.error('ai_defects should be dict')
             return 'ai_defects should be dict',411
         if info['ai_defects']:
             for k in info['ai_defects'].keys():
-                if k not in ['cr','cs','bc','mr']:
+                if k not in ['cr','cs','bc','mr',"Broken_busbar", "Black_spot", "Concentric_dark_ring", "scratch","Black_Edge_shadow", "Black_corner", "Bright_cell"]:
                     #raise TypeError('ai_defects wrong')
                     logger.error('ai_defects wrong')
                     return 'ai_defects wrong',412
         #if not isinstance(info['ai_time'],float):
             #logger.error('ai_time should be float')
             #return 'ai_time should be float',400
-        if info['gui_result'] not in [0,1,2]:
+        if info['gui_result'] is not None:
+            if info['gui_result'] not in [0,1,2]:
             #raise TypeError('gui_result should be 0 or 1')
-            logger.error('gui_result should be 0 or 1')
-            return 'gui_result should be 0 or 1',412
-        if not isinstance(info['gui_defects'], dict):
-            #raise TypeError('gui_defects should be list')
-            logger.error('gui_defects should be dict')
-            return 'gui_defects should be dict',411
+                logger.error('gui_result should be 0 or 1')
+                return 'gui_result should be 0 or 1',412
+        if info['gui_defects'] is not None:
+            if not isinstance(info['gui_defects'], dict):
+                #raise TypeError('gui_defects should be list')
+                logger.error('gui_defects should be dict')
+                return 'gui_defects should be dict',411
         if info['gui_defects']:
             for k in info['gui_defects'].keys():
-                if k not in ['cr','cs','bc','mr']:
+                if k not in ['cr','cs','bc','mr',"Broken_busbar", "Black_spot", "Concentric_dark_ring", "scratch", "Black_Edge_shadow", "Black_corner", "Bright_cell"]:
                     #raise TypeError('gui_defects wrong')
                     logger.error('gui_defects wrong')
                     return 'gui_defects wrong',411   
@@ -582,16 +664,21 @@ def panel_add():
     status.append({'result':info['ai_result'],'by':'AI'})
     status.append({'result':info['gui_result'],'by':'OP'})
     if info['ai_defects']:
-        for k in info['ai_defects'].keys():
-            for v in info['ai_defects'][k]:
-                if info['gui_defects'][k] and v in info['gui_defects'][k]:
+        if info['gui_defects'] is None:
+            for k in info['ai_defects'].keys():
+                for v in info['ai_defects'][k]:
                     defects.append({'type':k,'position':v,'by':'AI','status':'true'})
-                    #PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'AI','status':'true'})
-                    defects.append({'type':k,'position':v,'by':'OP','status':'true'})
-                    info['gui_defects'][k].remove(v)
-                elif not info['gui_defects'][k] or (info['gui_defects'][k] and v not in info['gui_defects'][k]):
-                    defects.append({'type':k,'position':v,'by':'AI','status':'false'})
-                    #PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'AI','status':'false'})
+        else:
+            for k in info['ai_defects'].keys():
+                for v in info['ai_defects'][k]:
+                    if info['gui_defects'][k] and v in info['gui_defects'][k]:
+                        defects.append({'type':k,'position':v,'by':'AI','status':'true'})
+                        #PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'AI','status':'true'})
+                        defects.append({'type':k,'position':v,'by':'OP','status':'true'})
+                        info['gui_defects'][k].remove(v)
+                    elif not info['gui_defects'][k] or (info['gui_defects'][k] and v not in info['gui_defects'][k]):
+                        defects.append({'type':k,'position':v,'by':'AI','status':'false'})
+                        #PANEL_DEFECT.insert({'panel_id':panel_id,'defect_id':defect_id,'by':'AI','status':'false'})
     if info['gui_defects']:
         for k in info['gui_defects'].keys():
             if info['gui_defects'][k]:
@@ -606,13 +693,16 @@ def panel_add():
     except BaseException:
         pass
     try:
-        PANEL.insert({'barcode' : info['barcode'], 'cell_type': info['cell_type'],'cell_amount': info['cell_amount'],'cell_shape':info['cell_shape'],'display_mode': info['display_mode'],'el_no':info['el_no'],'create_time':info['create_time'],'defects':defects,'status':status,'thresholds':dic})
+        if P:
+            PANEL.update({"barcode" : info["barcode"],"create_time" : info["create_time"],"el_no" : info["el_no"]},{'barcode' : info['barcode'], 'cell_type': info['cell_type'],'cell_amount': info['cell_amount'],'cell_shape':info['cell_shape'],'display_mode': info['display_mode'],'el_no':info['el_no'],'create_time':info['create_time'],'defects':defects,'status':status,'thresholds':dic})
+        else:
+            PANEL.insert({'barcode' : info['barcode'], 'cell_type': info['cell_type'],'cell_amount': info['cell_amount'],'cell_shape':info['cell_shape'],'display_mode': info['display_mode'],'el_no':info['el_no'],'create_time':info['create_time'],'defects':defects,'status':status,'thresholds':dic})
     except BaseException as e:
         logger.error('barcode already exists')
         return str(e),400
     #display_mode.insert({'display_mode': info['display_mode']})
     #module_no.insert({'module_no': info['module_no']})
-    EL.insert({'el_no': info['el_no']})
+    #EL.insert({'el_no': info['el_no']})
     '''try:
         panel_id = PANEL.insert({'barcode' : info['barcode'], 'cell_type': info['cell_type'],'cell_amount': info['cell_amount'],'cell_shape':info['cell_shape'],'display_mode': info['display_mode'],'el_no':info['el_no'],'create_time':info['create_time']})
     except BaseException as e:
@@ -651,6 +741,10 @@ def panel_add():
     logger.info('add panel')
     return jsonify(1),200
     #return 'OK',200
+
+
+
+
 @app.route('/barcde/find', methods=['GET','POST'])
 def barcde_find(): 
     #user = db.users 
@@ -688,6 +782,10 @@ def barcde_find():
     return jsonify(I[0])
     # for i in k['Defects']:
           #  print(i['Defect'])
+
+
+
+
 @app.route('/panel/check_last', methods=['GET','POST'])
 def check_last():
     panel = db.panel
@@ -699,6 +797,10 @@ def check_last():
         return jsonify(1)
     else:
         return jsonify(0)
+
+
+
+
 @app.route('/OK/find', methods=['GET','POST']) 
 def findOK(): 
     data = request.data
@@ -724,6 +826,10 @@ def findOK():
     #else:
    #     return 'False'
    # '''
+
+
+
+
 @app.route('/NG/find', methods=['GET','POST']) 
 def findNG(): 
     data = request.data
@@ -752,6 +858,10 @@ def findNG():
     else:
         return 'False'
     '''
+
+
+
+
 @app.route('/missrate/find', methods=['GET','POST']) 
 def missrate(): 
     data = request.data
@@ -782,6 +892,10 @@ def missrate():
     #))
     return jsonify(k)
     #return jsonify(a[0]['count']/(a[1]['count']+a[0]['count']))
+
+
+
+
 
 @app.route('/overkillrate/find', methods=['GET','POST']) 
 def overkillrate(): 
@@ -815,6 +929,10 @@ def overkillrate():
     '''
     return jsonify(k)
     #return str(a[1]['count']/(a[1]['count']+a[0]['count']))
+
+
+
+
 @app.route('/defect/find', methods=['GET','POST']) 
 def defecttime(): 
    # start = int(request.args['start'])

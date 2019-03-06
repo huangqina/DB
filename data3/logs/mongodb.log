@@ -1,51 +1,42 @@
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=2e72d01eef1a
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten] db version v3.6.9
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten] git version: 167861a164723168adfaaa866f310cb94010428f
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.1.0j  20 Nov 2018
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten] allocator: tcmalloc
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten] modules: none
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten] build environment:
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten]     distmod: debian92
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten]     distarch: x86_64
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten]     target_arch: x86_64
-2019-02-14T07:27:57.179+0000 I CONTROL  [initandlisten] options: { config: "/data/db/mongod.yml", net: { bindIpAll: true }, replication: { replSetName: "rs" }, security: { keyFile: "/data/db/keyFile" }, storage: { dbPath: "/data/db", journal: { enabled: true } }, systemLog: { component: { accessControl: { verbosity: 0 }, command: { verbosity: 0 }, control: { verbosity: 0 }, geo: { verbosity: 0 }, index: { verbosity: 0 }, network: { verbosity: 0 }, query: { verbosity: 0 }, replication: { verbosity: 0 }, storage: { verbosity: 0 }, write: { verbosity: 0 } }, destination: "file", logAppend: true, logRotate: "rename", path: "/data/db/logs/mongodb.log", quiet: true } }
-2019-02-14T07:27:57.179+0000 I STORAGE  [initandlisten] 
-2019-02-14T07:27:57.179+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
-2019-02-14T07:27:57.179+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
-2019-02-14T07:27:57.179+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3412M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),cache_cursors=false,compatibility=(release="3.0",require_max="3.0"),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
-2019-02-14T07:27:57.615+0000 I STORAGE  [initandlisten] WiredTiger message [1550129277:615666][1:0x7ff12c925600], txn-recover: Set global recovery timestamp: 0
-2019-02-14T07:27:57.673+0000 I STORAGE  [initandlisten] createCollection: local.startup_log with no UUID.
-2019-02-14T07:27:57.718+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
-2019-02-14T07:27:57.718+0000 I STORAGE  [initandlisten] createCollection: local.me with no UUID.
-2019-02-14T07:27:57.756+0000 I STORAGE  [initandlisten] createCollection: local.replset.minvalid with no UUID.
-2019-02-14T07:27:57.789+0000 I REPL     [initandlisten] Did not find local voted for document at startup.
-2019-02-14T07:27:57.789+0000 I REPL     [initandlisten] Did not find local Rollback ID document at startup. Creating one.
-2019-02-14T07:27:57.789+0000 I STORAGE  [initandlisten] createCollection: local.system.rollback.id with no UUID.
-2019-02-14T07:27:57.821+0000 I REPL     [initandlisten] Initialized the rollback ID to 1
-2019-02-14T07:27:57.821+0000 I REPL     [initandlisten] Did not find local replica set configuration document at startup;  NoMatchingDocument: Did not find replica set configuration document in local.system.replset
-2019-02-14T07:27:57.821+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
-2019-02-14T07:27:57.821+0000 I CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
-2019-02-14T07:27:58.931+0000 I NETWORK  [conn1] end connection 172.20.0.1:55542 (0 connections now open)
-2019-02-14T07:27:58.932+0000 I NETWORK  [conn2] received client metadata from 172.20.0.1:55550 conn2: { driver: { name: "NetworkInterfaceASIO-Replication", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
-2019-02-14T07:27:58.933+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Connecting to 192.168.2.10:27017
-2019-02-14T07:27:58.950+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Successfully connected to 192.168.2.10:27017, took 17ms (1 connections now open to 192.168.2.10:27017)
-2019-02-14T07:28:01.004+0000 I STORAGE  [replexec-0] createCollection: local.system.replset with no UUID.
-2019-02-14T07:28:01.004+0000 I NETWORK  [conn4] end connection 172.20.0.1:55600 (2 connections now open)
-2019-02-14T07:28:01.004+0000 I NETWORK  [conn3] end connection 172.20.0.1:55602 (1 connection now open)
-2019-02-14T07:28:01.034+0000 I NETWORK  [conn5] received client metadata from 172.20.0.1:55606 conn5: { driver: { name: "NetworkInterfaceASIO-Replication", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
-2019-02-14T07:28:01.035+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Connecting to 192.168.2.10:27018
-2019-02-14T07:28:01.036+0000 I ASIO     [NetworkInterfaceASIO-Replication-0] Successfully connected to 192.168.2.10:27018, took 1ms (1 connections now open to 192.168.2.10:27018)
-2019-02-14T07:28:01.037+0000 I REPL     [replexec-0] Stopping key manager
-2019-02-14T07:28:01.037+0000 I REPL     [replexec-0] New replica set config in use: { _id: "rs", version: 1, protocolVersion: 1, members: [ { _id: 0, host: "192.168.2.10:27017", arbiterOnly: false, buildIndexes: true, hidden: false, priority: 100.0, tags: {}, slaveDelay: 0, votes: 1 }, { _id: 1, host: "192.168.2.10:27018", arbiterOnly: false, buildIndexes: true, hidden: false, priority: 90.0, tags: {}, slaveDelay: 0, votes: 1 }, { _id: 3, host: "192.168.2.10:27019", arbiterOnly: true, buildIndexes: true, hidden: false, priority: 0.0, tags: {}, slaveDelay: 0, votes: 1 } ], settings: { chainingAllowed: true, heartbeatIntervalMillis: 2000, heartbeatTimeoutSecs: 10, electionTimeoutMillis: 10000, catchUpTimeoutMillis: -1, catchUpTakeoverDelayMillis: 30000, getLastErrorModes: {}, getLastErrorDefaults: { w: 1, wtimeout: 0 }, replicaSetId: ObjectId('5c65187e915a5b73231272a6') } }
-2019-02-14T07:28:01.037+0000 I REPL     [replexec-0] This node is 192.168.2.10:27019 in the config
-2019-02-14T07:28:01.037+0000 I REPL     [replexec-0] transition to ARBITER from STARTUP
-2019-02-14T07:28:01.037+0000 I REPL     [replexec-4] Member 192.168.2.10:27018 is now in state STARTUP2
-2019-02-14T07:28:01.037+0000 I REPL     [replexec-1] Member 192.168.2.10:27017 is now in state SECONDARY
-2019-02-14T07:28:03.038+0000 I REPL     [replexec-4] Member 192.168.2.10:27018 is now in state SECONDARY
-2019-02-14T07:28:09.827+0000 I STORAGE  [conn2] createCollection: local.replset.election with no UUID.
-2019-02-14T07:28:09.858+0000 I NETWORK  [conn6] received client metadata from 172.20.0.1:55672 conn6: { driver: { name: "NetworkInterfaceASIO-Replication", version: "3.6.9" }, os: { type: "Linux", name: "PRETTY_NAME="Debian GNU/Linux 9 (stretch)"", architecture: "x86_64", version: "Kernel 4.15.0-44-generic" } }
-2019-02-14T07:28:09.860+0000 I NETWORK  [conn2] end connection 172.20.0.1:55550 (2 connections now open)
-2019-02-14T07:28:11.041+0000 I REPL     [replexec-0] Member 192.168.2.10:27017 is now in state PRIMARY
-2019-02-14T07:32:57.821+0000 I CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
-2019-02-14T07:37:57.821+0000 I CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
-2019-02-14T07:42:57.821+0000 I CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
+2019-03-01T08:30:33.902+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1 port=27017 dbpath=/data/db 64-bit host=e05792d7115a
+2019-03-01T08:30:33.903+0000 I CONTROL  [initandlisten] db version v3.6.9
+2019-03-01T08:30:33.903+0000 I CONTROL  [initandlisten] git version: 167861a164723168adfaaa866f310cb94010428f
+2019-03-01T08:30:33.903+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.1.0j  20 Nov 2018
+2019-03-01T08:30:33.903+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+2019-03-01T08:30:33.903+0000 I CONTROL  [initandlisten] modules: none
+2019-03-01T08:30:33.903+0000 I CONTROL  [initandlisten] build environment:
+2019-03-01T08:30:33.903+0000 I CONTROL  [initandlisten]     distmod: debian92
+2019-03-01T08:30:33.903+0000 I CONTROL  [initandlisten]     distarch: x86_64
+2019-03-01T08:30:33.903+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+2019-03-01T08:30:33.903+0000 I CONTROL  [initandlisten] options: { config: "/data/db/mongod.yml", net: { bindIpAll: true }, replication: { replSetName: "rs" }, security: { keyFile: "/data/db/keyFile" }, storage: { dbPath: "/data/db", journal: { enabled: true } }, systemLog: { component: { accessControl: { verbosity: 0 }, command: { verbosity: 0 }, control: { verbosity: 0 }, geo: { verbosity: 0 }, index: { verbosity: 0 }, network: { verbosity: 0 }, query: { verbosity: 0 }, replication: { verbosity: 0 }, storage: { verbosity: 0 }, write: { verbosity: 0 } }, destination: "file", logAppend: true, logRotate: "rename", path: "/data/db/logs/mongodb.log", quiet: true } }
+2019-03-01T08:30:33.903+0000 I STORAGE  [initandlisten] 
+2019-03-01T08:30:33.903+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2019-03-01T08:30:33.903+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2019-03-01T08:30:33.903+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=3412M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),cache_cursors=false,compatibility=(release="3.0",require_max="3.0"),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),statistics_log=(wait=0),verbose=(recovery_progress),
+2019-03-01T08:30:34.332+0000 I STORAGE  [initandlisten] WiredTiger message [1551429034:332745][1:0x7f2619ed9600], txn-recover: Set global recovery timestamp: 0
+2019-03-01T08:30:34.396+0000 I STORAGE  [initandlisten] createCollection: local.startup_log with no UUID.
+2019-03-01T08:30:34.419+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory '/data/db/diagnostic.data'
+2019-03-01T08:30:34.420+0000 I STORAGE  [initandlisten] createCollection: local.me with no UUID.
+2019-03-01T08:30:34.444+0000 I STORAGE  [initandlisten] createCollection: local.replset.minvalid with no UUID.
+2019-03-01T08:30:34.467+0000 I REPL     [initandlisten] Did not find local voted for document at startup.
+2019-03-01T08:30:34.467+0000 I REPL     [initandlisten] Did not find local Rollback ID document at startup. Creating one.
+2019-03-01T08:30:34.467+0000 I STORAGE  [initandlisten] createCollection: local.system.rollback.id with no UUID.
+2019-03-01T08:30:34.490+0000 I REPL     [initandlisten] Initialized the rollback ID to 1
+2019-03-01T08:30:34.490+0000 I REPL     [initandlisten] Did not find local replica set configuration document at startup;  NoMatchingDocument: Did not find replica set configuration document in local.system.replset
+2019-03-01T08:30:34.491+0000 I NETWORK  [initandlisten] waiting for connections on port 27017
+2019-03-01T08:30:34.491+0000 I CONTROL  [LogicalSessionCacheReap] Sessions collection is not set up; waiting until next sessions reap interval: config.system.sessions does not exist
+2019-03-01T08:30:38.020+0000 I CONTROL  [signalProcessingThread] got signal 15 (Terminated), will terminate after current cmd ends
+2019-03-01T08:30:38.020+0000 I NETWORK  [signalProcessingThread] shutdown: going to close listening sockets...
+2019-03-01T08:30:38.020+0000 I NETWORK  [signalProcessingThread] removing socket file: /tmp/mongodb-27017.sock
+2019-03-01T08:30:38.021+0000 I REPL     [signalProcessingThread] shutdown: removing all drop-pending collections...
+2019-03-01T08:30:38.021+0000 I REPL     [signalProcessingThread] shutdown: removing checkpointTimestamp collection...
+2019-03-01T08:30:38.021+0000 I REPL     [signalProcessingThread] shutting down replication subsystems
+2019-03-01T08:30:38.021+0000 I FTDC     [signalProcessingThread] Shutting down full-time diagnostic data capture
+2019-03-01T08:30:38.023+0000 I STORAGE  [signalProcessingThread] WiredTigerKVEngine shutting down
+2019-03-01T08:30:38.494+0000 I STORAGE  [signalProcessingThread] WiredTiger message [1551429038:494494][1:0x7f26184bf700], txn-recover: Main recovery loop: starting at 1/20864
+2019-03-01T08:30:38.685+0000 I STORAGE  [signalProcessingThread] WiredTiger message [1551429038:685259][1:0x7f26184bf700], txn-recover: Recovering log 1 through 2
+2019-03-01T08:30:38.796+0000 I STORAGE  [signalProcessingThread] WiredTiger message [1551429038:795993][1:0x7f26184bf700], txn-recover: Recovering log 2 through 2
+2019-03-01T08:30:38.884+0000 I STORAGE  [signalProcessingThread] WiredTiger message [1551429038:884375][1:0x7f26184bf700], txn-recover: Set global recovery timestamp: 0
+2019-03-01T08:30:39.053+0000 I STORAGE  [signalProcessingThread] shutdown: removing fs lock...
+2019-03-01T08:30:39.053+0000 I CONTROL  [signalProcessingThread] now exiting
+2019-03-01T08:30:39.053+0000 I CONTROL  [signalProcessingThread] shutting down with code:0
