@@ -85,8 +85,6 @@ def update():
 
 url = {}
 
-PROJ_PATH = os.path.split(os.path.split(os.path.split(sys.argv[0])[0])[0])[0]
-PROJ_PATH = 
 with open('./SETUP/url.csv','r',newline='') as f:
     reader = csv.DictReader(f)
     for i in reader:
